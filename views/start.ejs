@@ -1,0 +1,28 @@
+<% include partials/head.ejs %>
+
+<div class="continer d-flex justify-content-center align-items-center" style="min-height: 600px;">
+    <div class="jumbotron border border-warning bg-white shadow" style="max-width: 800px;">
+        <h1 class="display-3 text-primary font-weight-bold">tSharing</h1>
+        <p class="lead">Share 
+            <span class="text-primary"><b>t</b></span>asks, save <span class="text-primary"><b>t</b></span>ime, improve 
+            <span class="text-primary"><b>t</b></span>eamwork with your flatmates.</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end bd-highlight text-center" style="height: 100px;">
+            <a class="btn btn-primary p-3 mr-2" href="/login" role="button">
+                <img class="img" style="height: 50px; width: auto; display: block;" src="img/login.png" alt="login">
+                <b>L</b>ogin
+            </a>
+            <a class="btn btn-warning p-3 mr-2" href="/join" role="button">
+                <img class="img" style="height: 50px; width: auto; display: block;" src="img/join.png" alt="join">
+                <b>J</b>oin
+            </a>
+            <a class="btn btn-info p-3 mr-2" href="/create" role="button">
+                <img class="img" style="height: 50px; width: auto; display: block;" src="img/create.png" alt="create">
+                <b>C</b>reate
+            </a>
+        </div>
+    </div>
+    <img src="img/curves.png" alt="curves" style="background-attachment: fixed; user-select: none; position: absolute; z-index: -1; top: 25px; min-width: 100%; max-width: 100%; height: auto;">
+</div>
+
+<% include partials/footer.ejs %>
