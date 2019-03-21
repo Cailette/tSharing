@@ -27,39 +27,6 @@ router.post('/', isNotAuthenticated(), function(req, res, next)
             res.render('login', { msg: 'User does not exist.'} );
         }
     })
-
-
-    // db = require('../db.js');
-    // const uMail = req.body.uMail;
-    // const uPassword = req.body.uPassword;
-
-    // var selectMate = "SELECT idMate, mPassword FROM `mates` WHERE `mMail`='" + uMail + "'";                           
-    // db.query(selectMate, function(err, user)
-    // {
-    //     if (err) throw err;
-    //     if(user.length != 0)
-    //     {
-    //         const USER_PASSWORD = user[0].mPassword;
-    //         console.log("USER_PASSWORD: " + user[0].mPassword.toString());
-    //         bcrypt.compare(uPassword, USER_PASSWORD, function(err, result) {
-    //             console.log("result: " + result.toString());
-    //             if(result == true)
-    //             {
-    //                 const USER_ID = user[0].idMate;
-    //                 console.log("USER_ID: " + USER_ID);
-    //                 req.session.USER_ID = USER_ID;
-    //                 req.login(USER_ID, function(err) {
-    //                     res.redirect('/sharing/yourTasks') 
-    //                 })
-    //             }else{
-    //                 res.render('login', { msg: "Incorrect password. Please try again." });
-    //             }
-    //         });
-    //     }
-    //     else{
-    //         res.render('login', { msg: "Incorrect e-mail. Please try again." });
-    //     }
-    // });
 });
 
 passport.serializeUser(function(USER_ID, done)
