@@ -1,10 +1,13 @@
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-  database : process.env.DB_NAME
-})
+"use strict";
 
-connection.connect()
-module.exports = connection;
+var path      = require("path");
+var Sequelize = require("sequelize");
+var env       = process.env.NODE_ENV || "development";
+var config    = require(path.join(__dirname, '.', 'config', 'config.json'))[env];
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
+var db        = {};
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;

@@ -1,11 +1,22 @@
 <% include partials/head.ejs %>
 
 <div class="continer d-flex justify-content-center align-items-center p-4">
-    <div class="jumbotron border border-warning bg-white shadow m-4" style="max-width: 500px;">
+    <div class="jumbotron bg-white shadow m-4" style="max-width: 500px;">
         <h4 class="display-4 text-primary">Join</h4>
         <p class="lead">Join task sharing board and share duties at home with your flatmates.</p>
         <hr class="my-4">
         <form method="POST" action="/join">
+            <% if (msg != "") { 
+                if (Array.isArray(msg)) {
+                    for(var i=0; i < msg.length; i++) { %>
+                        <div class="alert alert-warning my-0 p-2"><%= msg[i].msg %></div>
+                    <% } %>
+                <hr class="my-4">
+                <% } else { %>
+                    <div class="alert alert-danger my-0 p-2"><%= msg %></div>
+                    <hr class="my-4">
+                <% } 
+             } %>
             <div class="form-group">
                 <input type="text" class="form-control" name="bName" id="bName" placeholder="Enter board name*" required>
             </div>

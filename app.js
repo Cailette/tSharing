@@ -5,7 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
- 
+
+// Authentication Packages
+var session = require('express-session');
+var passport = require('passport');
+var MySQLStore = require('express-mysql-session')(session);
+
 var startRouter = require('./routes/start');
 var joinRouter = require('./routes/join');
 var loginRouter = require('./routes/login');
@@ -37,6 +42,18 @@ var options = {
   database : process.env.DB_NAME
 };
 
+var sessionStore = new MySQLStore(options);
+
+app.use(session({
+  secret: 'gssegsegsegseg',
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  USER_ID : 'user_id'
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', startRouter);
 app.use('/start', startRouter);
 app.use('/join', joinRouter);
@@ -48,6 +65,7 @@ app.use('/sharing', sharingRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

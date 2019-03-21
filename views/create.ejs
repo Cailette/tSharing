@@ -1,11 +1,22 @@
 <% include partials/head.ejs %>
 
 <div class="continer d-flex justify-content-center align-items-center p-4">
-    <div class="jumbotron border border-warning bg-white shadow m-4" style="max-width: 500px;">
+    <div class="jumbotron bg-white shadow m-4" style="max-width: 500px;">
         <h4 class="display-4 text-primary">Create</h4>
         <p class="lead">Create task sharing board and Your account. Your flatmates will be able to join You thanks to a unique house name and password.</p>
         <hr class="my-4">
-        <form method="POST" action="/create">
+        <form method="POST" action="/create" autocomplete="on">
+            <% if (msg != "") { 
+                if (Array.isArray(msg)) {
+                    for(var i=0; i < msg.length; i++) { %>
+                        <div class="alert alert-warning my-0 p-2"><%= msg[i].msg %></div>
+                    <% } %>
+                <hr class="my-4">
+                <% } else { %>
+                    <div class="alert alert-danger my-0 p-2"><%= msg %></div>
+                    <hr class="my-4">
+                <% } 
+             } %>
             <div class="form-group">
                 <input type="text" class="form-control" name="bName" id="bName" placeholder="Enter board name*" required>
             </div>
@@ -34,7 +45,6 @@
                 <button class="btn btn-danger mr-2" onclick="location.href='start'">Back</button>
                 <button class="btn btn-primary lg-4" type="submit">Create</button>
             </div>
-            <!-- <div class="alert alert-warning" visible="false"><%= msg %>ALERT MESSAGE</div> -->
         </form>
     </div>
     <img src="img/curves.png" alt="curves" style="background-attachment: fixed; user-select: none; position: absolute; z-index: -1; top: 25px; min-width: 100%; max-width: 100%; height: auto;">
