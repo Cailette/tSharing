@@ -2,6 +2,7 @@ var bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 const Board = require('../models/board');
+var validate = require('./validateFormInput');
 
 
 exports.createGet = function(req, res) {
@@ -9,7 +10,7 @@ exports.createGet = function(req, res) {
 };
 
 exports.validatePost = function(req, res, next) {
-    var errors = req.validationErrors();
+    var errors = validate.validateCreate(req);
     if(errors) 
     {
         console.log(`errors: ${JSON.stringify(errors)}`);
@@ -67,7 +68,7 @@ exports.createPost = function(req, res, next) {
             userData.idBoard = board.idBoard;
             User.create(userData)
             .then(user => {
-                res.redirect('/');
+                res.redirect('/invitation');
             })
             .catch(err => {
                 console.log('error: ' + err);

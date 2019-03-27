@@ -2,13 +2,14 @@ var bcrypt = require('bcrypt');
 
 const User = require('../models/user');
 const Board = require('../models/board');
+var validate = require('./validateFormInput');
 
 exports.joinGet = function(req, res) {
     res.render('join', { msg: "" });
 };
 
 exports.validatePost = function(req, res, next) {
-    const errors = req.validationErrors();
+    const errors = validate.validateJoin(req);
     if(errors)
     {
         console.log(`errors: ${JSON.stringify(errors)}`);

@@ -17,6 +17,7 @@ var joinRouter = require('./routes/join');
 var loginRouter = require('./routes/login');
 var createRouter = require('./routes/create');
 var sharingRouter = require('./routes/sharing');
+var invitationRouter = require('./routes/invitation');
 
 var app = express();
 require('dotenv').config();
@@ -61,6 +62,7 @@ app.use('/join', joinRouter);
 app.use('/login', loginRouter);
 app.use('/create', createRouter);
 app.use('/sharing', sharingRouter);
+app.use('/invitation', invitationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

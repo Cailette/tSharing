@@ -1,0 +1,34 @@
+<% include partials/head.ejs %>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId            : '407463219836678',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.2'
+        });
+    };
+    function doInvite() {
+        FB.ui({
+            method: 'send',
+            link: 'http://www.nytimes.com/interactive/2015/04/15/travel/europe-favorite-streets.html',
+        });
+    }
+</script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+  
+<div class="continer d-flex justify-content-center align-items-center p-4" style="min-height: 600px;">
+        <div class="jumbotron bg-white shadow" style="max-width: 700px;">
+        <h1 class="display-3 text-primary font-weight-bold">tSharing</h1>
+        <p class="lead">Invite your friends via email or facebook message! Share your board name and password with them or or tell them personally that you are sharing your household duties from today.</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end bd-highlight text-center text-white">
+            <a class="btn btn-primary p-2 mr-2"  href="mailto:?subject=I want you to join me on tsharing&amp;body=Check out this site www.tsharing.com using the...">Invite via mail</a>
+            <a class="btn btn-info p-2 mr-2" onclick="doInvite()">Invite via facebook</a>
+            <a class="btn btn-danger p-2 mr-2" onclick="location.href='start'">Skip</a>
+        </div>
+    </div>
+    <img src="img/curves.png" alt="curves" style="background-attachment: fixed; user-select: none; position: absolute; z-index: -1; top: 25px; min-width: 100%; max-width: 100%; height: auto;">
+</div>
+
+<% include partials/footer.ejs %>
