@@ -9,6 +9,7 @@ var expressValidator = require('express-validator');
 // Authentication Packages
 var session = require('express-session');
 var passport = require('passport');
+require('./config/passport')(passport);
 var MySQLStore = require('express-mysql-session')(session);
 
 var startRouter = require('./routes/start');

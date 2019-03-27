@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.render('start');
-});
+var startController = require('../controllers/startController');
 
-router.post('/', function(req, res, next) {
-    res.render('start');
-});
+router.get('/', startController.startGet);
+
+router.post('/', startController.startPost);
 
 module.exports = router;
