@@ -4,6 +4,7 @@ A web application for assigning tasks, saving time and improving team work with 
 - <a href="https://github.com/visionmedia/express">Express.js</a>
 - <a href="https://github.com/nlf/connect-mysql">Express-session</a>
 - <a href="https://npmjs.org/package/mysql">MySQL</a>
+- <a href="https://github.com/sequelize/sequelize">Sequelize</a>
 - <a href="https://github.com/tj/ejs">EJS</a>
 - <a href="https://github.com/jaredhanson/passport">Passport.js</a>
 - <a href="http://getbootstrap.com/">Bootstrap</a>
@@ -15,12 +16,20 @@ Install
 3. git clone https://github.com/Cailette/tSharing.git .
 7. npm install
 8. npm start OR nodemon ./bin/www 
+9. then load http://localhost:3000/ in your browser to access the app
 
 Debug
 --
 - <a href="https://npmjs.org/package/nodemon">nodemon</a>
 - npm -g install nodemon
 - nodemon app.js
+
+Unit tests
+--
+- <a href="https://github.com/mochajs/mocha">Mocha</a>
+- npm install mocha 
+- mkdir test
+- npm test OR mocha --exit
 
 Functionality
 --

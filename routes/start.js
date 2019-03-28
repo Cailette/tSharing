@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var startController = require('../controllers/startController');
+var startController = require('../controllers/start');
 
-router.get('/', startController.startGet);
+router.get('/', startController.get);
 
-router.post('/', startController.startPost);
+router.post('/', startController.post);
 
 module.exports = router;

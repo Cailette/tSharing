@@ -6,11 +6,13 @@ module.exports = db.sequelize.define('board', {
     idBoard: { 
         autoIncrement: true, 
         primaryKey: true, 
+        notEmpty: true,
         type: Sequelize.INTEGER
     },
     name: { 
         type: Sequelize.STRING,
-        notEmpty: true
+        notEmpty: true,
+        allowNull: false 
     },
     password: {
         type: Sequelize.STRING,

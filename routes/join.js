@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var joinController = require('../controllers/join');
+var validateFormInput = require('../controllers/validateFormInput');
 
-var joinController = require('../controllers/joinController');
+router.get('/', joinController.get);
 
-router.get('/', joinController.joinGet);
-
-router.post('/', joinController.validatePost, joinController.joinPost);
+router.post('/', validateFormInput.validateJoinForm, joinController.post);
 
 module.exports = router;

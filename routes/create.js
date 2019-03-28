@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var createController = require('../controllers/createController');
+var createController = require('../controllers/create');
+var validateFormInput = require('../controllers/validateFormInput');
 
-router.get('/', createController.createGet);
+router.get('/', createController.get);
 
-router.post('/', createController.validatePost, createController.createPost);
+router.post('/', validateFormInput.validateCreateForm, createController.post);
 
 module.exports = router;

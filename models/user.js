@@ -6,15 +6,19 @@ module.exports = db.sequelize.define('user', {
     idUser: { 
         autoIncrement: true, 
         primaryKey: true, 
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        notEmpty: true
     },
     email: { 
-        type:Sequelize.STRING, 
-        validate: {isEmail:true}
+        type: Sequelize.STRING, 
+        validate: {isEmail:true},
+        allowNull: false,
+        notEmpty: true
     },
     name: { 
         type: Sequelize.STRING,
-        notEmpty: true
+        notEmpty: true,
+        allowNull: false 
     },
     password: {
         type: Sequelize.STRING,
@@ -24,7 +28,9 @@ module.exports = db.sequelize.define('user', {
     idBoard: {
         type: Sequelize.INTEGER,
         references:'board',
-        referencesKey:'idBoard'
+        referencesKey:'idBoard',
+        notEmpty: true,
+        allowNull: false 
     }
 }, {
     timestamps: false
