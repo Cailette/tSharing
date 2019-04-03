@@ -10,7 +10,7 @@ A web application for assigning tasks, saving time and improving team work with 
 - <a href="http://getbootstrap.com/">Bootstrap</a>
 
 Install
---
+-- 
 1. mkdir folder_name
 2. cd folder_name
 3. git clone https://github.com/Cailette/tSharing.git .
