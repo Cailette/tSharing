@@ -1,7 +1,5 @@
 var bcrypt = require('bcrypt');
 
-const User = require('../models/user');
-const Board = require('../models/board');
 const userContoroller = require('./user');
 const boardContoroller = require('./board');
 const { hashPassword } = require('./create');

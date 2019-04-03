@@ -14,9 +14,9 @@ Install
 1. mkdir folder_name
 2. cd folder_name
 3. git clone https://github.com/Cailette/tSharing.git .
-7. npm install
-8. npm start OR nodemon ./bin/www 
-9. then load http://localhost:3000/ in your browser to access the app
+4. npm install
+5. npm start OR nodemon ./bin/www 
+6. then load http://localhost:3000/ in your browser to access the app
 
 Debug
 --
@@ -36,3 +36,4 @@ Functionality
 1. In the "Create" tab, you can create a board with a unique name and password, as well as your account. Then you can invite friends to join you by sending facebook message or e-mail.
 2. In the "Join" tab, you can join the board using the name and password from your friend and create your account.
 3. In the "Login" tab, you can log in to your account associated with the board shared with your friends.
+4. After logging in on the "account" tab, the user can view teammates and edit or delete the account.

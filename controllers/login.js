@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt');
 const userContoroller = require('./user');
 
-var join = module.exports = {
+var login = module.exports = {
 
     get: function(req, res) {
         res.render('login', { msg: "" });
@@ -14,7 +14,9 @@ var join = module.exports = {
             res.render('login', { msg: "User does not exist." });
         } else {
             const USER_ID = existU.idUser;
+            const BOARD_ID = existU.idBoard;
             req.session.USER_ID = USER_ID;
+            req.session.BOARD_ID = BOARD_ID;
             req.login(USER_ID, function(err) {
                 res.redirect('/sharing') 
             })

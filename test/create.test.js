@@ -51,8 +51,4 @@ describe('Unit testing the /create route', function() {
               expect(response.text).to.contain("alert");
           })
       });
-
-    
-
-
 });

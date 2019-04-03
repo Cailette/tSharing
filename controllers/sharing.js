@@ -1,11 +1,11 @@
-var join = module.exports = {
+var sharing = module.exports = {
 
 	get: function(req, res, next) {
 		res.redirect('/sharing/yourTasks') 
 	},
 
 	yourTasks: function(req, res, next) {
-		res.render('sharing');   
+		res.render('sharing', { page: 'yourTasks' });   
 	},
 
 	logout: function(req, res, next) {

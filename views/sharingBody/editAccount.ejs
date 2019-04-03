@@ -1,0 +1,33 @@
+<div class="continer d-flex align-items-center justify-content-center">
+    <div class="continer-fluid m-4" style="min-width: 800px">
+        <div class="row bg-white shadow-sm p-3 m-4">
+            <div class="col m-4">
+                <div class="row">
+                    <h2 class="text-danger"><strong>Edit account:</strong></h2>
+                </div>
+                <div class="row d-flex justify-content-center align-items-center p-4">
+                    <form method="POST" action="/sharing/posteditaccount" autocomplete="off"> 
+                        <div class="form-group">
+                            <input type="text" name="uName" id="uName" class="form-control mt-2" placeholder="Enter new name" value="<%= user.name %>">
+                            <input type="password" name="oldPassword" id="oldPassword" class="form-control mt-2" placeholder="Enter old password">
+                            <input type="password" name="uPassword" id="uPassword" class="form-control mt-2" placeholder="Enter new password">
+                            <input type="password" name="uPasswordMatch" id="uPasswordMatch" class="form-control mt-2" placeholder="Re-enter new password">
+                        </div>
+                        <div class="d-flex justify-content-end bd-highlight text-center">
+                            <button class="btn btn-primary lg-2" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <% if (msg != "") { 
+                    if (Array.isArray(msg)) {
+                        for(var i=0; i < msg.length; i++) { %>
+                            <div class="alert alert-warning my-0 p-2"><%= msg[i].msg %></div>
+                        <% } %>
+                    <% } else { %>
+                        <div class="alert alert-danger my-0 p-2"><%= msg %></div>
+                    <% } 
+                } %>
+            </div>
+        </div>
+    </div>
+</div>
