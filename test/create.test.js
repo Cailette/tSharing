@@ -2,7 +2,7 @@ const assert = require('assert');
 const expect = require('chai').expect
 const request = require('supertest');
 const app = require('../app')
-const { get, post } = require('../controllers/create');
+const { get, post } = require('../controllers/router/create');
 const { validateCreateForm } = require('../controllers/validateFormInput');
 
 let req = {

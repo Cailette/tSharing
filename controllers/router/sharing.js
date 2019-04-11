@@ -1,11 +1,11 @@
 var sharing = module.exports = {
 
 	get: function(req, res, next) {
-		res.redirect('/sharing/yourTasks') 
+		res.redirect('/sharing/allTasks') 
 	},
 
-	yourTasks: function(req, res, next) {
-		res.render('sharing', { page: 'yourTasks' });   
+	start: function(req, res, next) {
+		res.redirect('/') 
 	},
 
 	logout: function(req, res, next) {
@@ -13,5 +13,4 @@ var sharing = module.exports = {
 		req.session.destroy();
 		res.redirect('/'); 
 	},
-
 }

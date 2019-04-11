@@ -1,35 +1,51 @@
 var Sequelize = require("sequelize");
 const db = require('../db.js');
 
-module.exports = db.sequelize.define('user', {
-        idUser: { 
+module.exports = db.sequelize.define('task', {
+        idTask: { 
             autoIncrement: true, 
             primaryKey: true, 
             type: Sequelize.INTEGER,
             notEmpty: true
         },
-        email: { 
+        title: { 
             type: Sequelize.STRING, 
-            validate: {isEmail:true},
             allowNull: false,
             notEmpty: true
         },
-        name: { 
+        comment: { 
             type: Sequelize.STRING,
+            notEmpty: false,
+            allowNull: true 
+        },
+        date: {
+            type: Sequelize.STRING,
+            notEmpty: true,
+            allowNull: false
+        }, 
+        status: {
+            type: Sequelize.ENUM('deleted','assigned','completed','free'),
+            defaultValue: 'free',
             notEmpty: true,
             allowNull: false 
         },
-        password: {
-            type: Sequelize.STRING,
+        idUser: {
+            type: Sequelize.INTEGER,
+            references:'user',
+            referencesKey:'idUser',
             notEmpty: true,
             allowNull: false 
-        }, 
+        },  
         idBoard: {
             type: Sequelize.INTEGER,
             references:'board',
             referencesKey:'idBoard',
             notEmpty: true,
             allowNull: false 
+        },
+        rating: {
+            type: Sequelize.FLOAT,
+            allowNull: true 
         }
     }, {
         timestamps: false

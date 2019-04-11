@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var joinController = require('../controllers/join');
+var joinController = require('../controllers/router/join');
 var validateFormInput = require('../controllers/validateFormInput');
 
 router.get('/', joinController.get);

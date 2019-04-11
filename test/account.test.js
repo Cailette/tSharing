@@ -2,7 +2,7 @@ const assert = require('assert');
 const expect = require('chai').expect
 const request = require('supertest');
 const app = require('../app')
-const userContoroller = require('../controllers/user');
+const userContoroller = require('../controllers/model/user');
 
 let req = {
     body: {},

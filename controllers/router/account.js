@@ -1,5 +1,5 @@
-const userContoroller = require('./user');
-const boardContoroller = require('./board');
+const userContoroller = require('../model/user');
+const boardContoroller = require('../model/board');
 var bcrypt = require('bcrypt');
 const { hashPassword } = require('./create');
 
@@ -42,6 +42,8 @@ var account = module.exports = {
                 } else {
                     res.render('login', { msg: "Something went wrong." });
                 }
+            } else {
+                res.redirect('/'); 
             }
         } else {
             res.render('login', { msg: "Something went wrong." });

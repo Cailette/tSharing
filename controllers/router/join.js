@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt');
 
-const userContoroller = require('./user');
-const boardContoroller = require('./board');
+const userContoroller = require('../model/user');
+const boardContoroller = require('../model/board');
 const { hashPassword } = require('./create');
 
 var join = module.exports = {

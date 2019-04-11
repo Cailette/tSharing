@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt');
 
-const userContoroller = require('./user');
-const boardContoroller = require('./board');
+const userContoroller = require('../model/user');
+const boardContoroller = require('../model/board');
 
 
 var create = module.exports = {

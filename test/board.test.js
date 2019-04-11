@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-const boardContoroller = require('../controllers/board');
+const boardContoroller = require('../controllers/model/board');
 
 describe('Models', function() {
 
@@ -13,8 +13,8 @@ describe('Models', function() {
     });
 
     it('should find board by name', async function() {
-        return await boardContoroller.getByName("Test").then(function(result){            
-            expect(result.name).to.equal("Test");
+        return await boardContoroller.getByName("Friends").then(function(result){            
+            expect(result.name).to.equal("Friends");
         });
     });
 

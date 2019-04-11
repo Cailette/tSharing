@@ -1,4 +1,4 @@
-const userContoroller = require('./user');
+const userContoroller = require('./model/user');
 
 exports.validateCreateForm =  function(req, res, next)  {
     req.checkBody('bName', 'Board name must be between 2-15 characters long.').len(2, 15);
@@ -53,6 +53,19 @@ exports.validateEditForm = async function(req, res, next)  {
     if(errors){
         const user = await userContoroller.getById(req.session.USER_ID);
         res.render('sharing', { page: 'editAccount', user: user, msg: errors });
+    } else {
+        next();
+    }
+};
+
+exports.validateTaskForm = async function(req, res, next)  {
+    req.checkBody('tTitle', 'Topic field can not be empty.').notEmpty();
+    req.checkBody('tTitle', 'Topic must be between 1-45 characters long.').len(1, 45);
+    req.checkBody('tComment', 'Comment must be between 0-500 characters long.').len(0, 500);
+    
+    const errors = req.validationErrors();
+    if(errors){
+        res.render('sharing', { page: 'allTasks' }); 
     } else {
         next();
     }

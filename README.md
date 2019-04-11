@@ -37,3 +37,4 @@ Functionality
 2. In the "Join" tab, you can join the board using the name and password from your friend and create your account.
 3. In the "Login" tab, you can log in to your account associated with the board shared with your friends.
 4. After logging in on the "account" tab, the user can view teammates and edit or delete the account.
+5. After logging in on the "All tasks" tab, the user can see all tasks added by the board's members. User can add new task, assign any free task to himself or delete it.

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var startController = require('../controllers/start');
+var startController = require('../controllers/router/start');
 
 router.get('/', startController.get);
 

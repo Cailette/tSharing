@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var createController = require('../controllers/create');
+var createController = require('../controllers/router/create');
 var validateFormInput = require('../controllers/validateFormInput');
 
 router.get('/', createController.get);

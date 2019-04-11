@@ -1,11 +1,11 @@
 var expect = require('chai').expect
-const userContoroller = require('../controllers/user');
+const userContoroller = require('../controllers/model/user');
 
 describe('Models', function() {
 
     it('should not create user without password', async function() {
         const userData = {
-            email: "test@test.com"
+            email: "ala@ala.com"
         }  
         return await userContoroller.create(userData).then(function(result){
             expect(result).to.be.equal(false);
@@ -14,8 +14,8 @@ describe('Models', function() {
 
     it('should not create user without idBoard', async function() {
         const userData = {
-            email: "test@test.com",
-            name: "Test",
+            email: "ala@ala.com",
+            name: "Ala",
             password: "Password"
         }  
         return await userContoroller.create(userData).then(function(result){
@@ -24,8 +24,8 @@ describe('Models', function() {
     });
 
     it('should find user by email', async function() {
-        return await userContoroller.getByEmail("test@test.com").then(function(result){            
-            expect(result.email).to.equal("test@test.com");
+        return await userContoroller.getByEmail("ala@ala.com").then(function(result){            
+            expect(result.email).to.equal("ala@ala.com");
         });
     });
 

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var loginController = require('../controllers/login');
+var loginController = require('../controllers/router/login');
 var auth = require('../auth/auth');
 
 router.get('/', auth.isNotAuthenticated, loginController.get); 
