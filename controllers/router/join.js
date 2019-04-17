@@ -28,7 +28,7 @@ var join = module.exports = {
                         email: req.body.uEmail,
                         name: req.body.uName,
                         password: uhash,
-                        idBoard: existB.idBoard
+                        BoardId: existB.id
                     }  
                     const createdUser = await userContoroller.create(userData);
 

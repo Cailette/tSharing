@@ -1,4 +1,4 @@
-const User = require('../../models/user');
+const User = require( '../../models/index.js').User;
 
 var user = module.exports = {
     
@@ -17,7 +17,7 @@ var user = module.exports = {
     delete: async function(idUser) {
 		return await User.destroy({
             where: {
-                idUser: idUser
+                id: idUser
             }
         }).then(() => {
             return true;
@@ -31,7 +31,7 @@ var user = module.exports = {
     update: async function(userData, idUser) {
 		return await User.update(
             userData, 
-            { where: {idUser: idUser} 
+            { where: {id: idUser} 
         }).then(() => {
             return true;
         })
@@ -44,7 +44,7 @@ var user = module.exports = {
     getById: async function(idUser) {
 		return await User.findOne({
             where: {
-                idUser: idUser
+                id: idUser
             }
         }).then(user => {
             if(user) return user;
@@ -69,10 +69,10 @@ var user = module.exports = {
         })
     },
     
-    getTeammates: async function(idBoard, idUser) {
+    getTeammates: async function(idBoard) {
 		return await User.findAll({
             where: {
-                idBoard: idBoard
+                BoardId: idBoard
             }
         }).then(users => {
             if(users) return users;

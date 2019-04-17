@@ -30,13 +30,13 @@ var account = module.exports = {
 		req.logout();
         req.session.destroy();
 
-        const deleteUser = await userContoroller.delete(user.idUser);
+        const deleteUser = await userContoroller.delete(user.id);
         if (deleteUser) {
 
-            const teammates = await userContoroller.getTeammates(user.idBoard, user.idUser);
+            const teammates = await userContoroller.getTeammates(user.BoardId, user.id);
             if (!(teammates.length > 0)) {
 
-                const deleteBoard = await boardContoroller.delete(user.idBoard);
+                const deleteBoard = await boardContoroller.delete(user.BoardId);
                 if (deleteBoard) {
                     res.redirect('/'); 
                 } else {

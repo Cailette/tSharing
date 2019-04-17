@@ -33,7 +33,7 @@ var create = module.exports = {
                     email: req.body.uEmail,
                     name: req.body.uName,
                     password: uhash,
-                    idBoard: createdBoard.idBoard
+                    BoardId: createdBoard.id
                 }  
                 const createdUser = await userContoroller.create(userData);
 

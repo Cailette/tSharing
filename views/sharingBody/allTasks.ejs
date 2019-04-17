@@ -1,77 +1,80 @@
-<div class="container mt-4 py-4">
-    <form method="POST" action="/sharing/addTask">
-        <div class="form-group row w-50 my-4 mx-auto">
-            <div class="col-md-10">   
-                <div class="row">
-                    <input class="form-control shadow-sm" id="tTitle" type="text" placeholder="Task" name="tTitle" maxlength="45" required>
-                </div>
-                <div class="row mt-2">
-                    <textarea class="form-control shadow-sm" id="tComment" placeholder="Comment" name="tComment" maxlength="500" rows="2"></textarea>
-                </div>
+<div class="container mt-4 py-4" id="allTasksView">
+<form id="addTaskForm">
+    <div class="form-group row w-50 my-4 mx-auto">
+        <div class="col-md-10">   
+            <div class="row">
+                <input class="form-control shadow-sm" id="tTitle" type="text" placeholder="Task" name="tTitle" maxlength="45" required>
             </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-outline-info  bg-light" title="Add new task"><span class="small">Add</span></button>
-                <div class="mt-2" id="countTopic">
-                    <span id="currentTopic">0</span>
-                    <span id="maximumTopic">/45</span>
-                </div>
-                <div id="countComment">
-                    <span id="currentComment">0</span>
-                    <span id="maximumComment">/500</span>
-                </div>
+            <div class="row mt-2">
+                <textarea class="form-control shadow-sm" id="tComment" placeholder="Comment" name="tComment" maxlength="500" rows="2"></textarea>
             </div>
         </div>
-    </form>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-outline-info  bg-light" title="Add new task" id="addTask"><span class="small">Add</span></button>
+            <div class="mt-2" id="countTopic">
+                <span id="currentTopic">0</span>
+                <span id="maximumTopic">/45</span>
+            </div>
+            <div id="countComment">
+                <span id="currentComment">0</span>
+                <span id="maximumComment">/500</span>
+            </div>
+        </div>
+    </div>
+</form>
 
-    <hr class="w-50 my-4">
+<hr class="w-50 my-4">
 
-    <% if(tasks.length != 0){ %>
-        <% tasks.forEach(function (task) { %>
-        <div class="row justify-content-center align-items-center mb-4">
-            <div class="card bg-light mb-3 card-block w-50 shadow-sm">
-                <div class="card-header">
-                    <div class="d-flex">
-                        <div class="px-2 mt-2 align-self-center">
-                            <h5 class="text-dark"><%= task.title %></h5>
+<% if(tasks.length != 0){ %>
+    <% tasks.forEach(function (task) { %>
+    <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
+        <div class="card bg-light mb-3 card-block w-50 shadow-sm">
+            <div class="card-header">
+                <div class="d-flex">
+                    <div class="px-2 mt-2 align-self-center">
+                        <h5 class="text-dark"><%= task.title %></h5>
+                    </div>
+                    <% if(task.status === "free") { %>
+                        <div class="btns px-2 ml-auto" id="btns<%= task.id %>">
+                            <div class="idAssign btn btn-outline-success m-2 bg-light" id="assignTask?idTask=<%= task.id %>"  title="Take the task"><span class="small">Assign</span></div>
+                            <div class="idDelete btn btn-outline-danger m-2 bg-light" id="deleteTask?idTask=<%= task.id %>" title="Delete the task"><span class="small">Delete</span></div>
                         </div>
-                        <% if(task.status === "free") { %>
-                            <div class="px-2 ml-auto">
-                                <a  href="/sharing/assignTask?idTask=<%= task.idTask %>" class="btn btn-outline-success m-2 bg-light" title="Take the task"><span class="small">Assign</span></a>
-                                <a  href="/sharing/deleteTask?idTask=<%= task.idTask %>" class="btn btn-outline-danger m-2 bg-light" title="Delete the task"><span class="small">Delete</span></a>
-                            </div>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="card-body bg-white">
-                    <%if (task.comment !== "") { %>
-                        <div class="row px-2" style="white-space: pre-wrap;">
-                            <p><%= task.comment %></p>
-                        </div> 
                     <% } %>
-                    <div class="row d-flex px-4">
-                        <% if(task.status === "assigned") { %>
-                            <span class="badge badge-pill badge-light ml-auto">
-                                Assigned to: <span class="text-danger"><%= task.idUser %></span>, <%= task.date %>
-                            </span>
-                        <% } %>
-                        <% if(task.status === "free") { %>
-                            <span class="badge badge-pill badge-light ml-auto">
-                                Added by: <span class="text-danger"><%= task.idUser %></span>, <%= task.date %>
-                            </span>
-                        <% } %>
-                    </div>
+                </div>
+            </div>
+            <div class="card-body bg-white">
+                <%if (task.comment !== "") { %>
+                    <div class="row px-2" style="white-space: pre-wrap;">
+                        <p><%= task.comment %></p>
+                    </div> 
+                <% } %>
+                <div class="row d-flex px-4 dataRow" id="dataRow<%= task.id %>">
+                    <% if(task.status === "assigned") { %>
+                        <span class="badge badge-pill badge-light ml-auto">
+                            Assigned to: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
+                        </span>
+                    <% } %>
+                    <% if(task.status === "free") { %>
+                        <span class="badge badge-pill badge-light ml-auto">
+                            Added by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
+                        </span>
+                    <% } %>
                 </div>
             </div>
         </div>
-        <% }) %>
-    <% } else{ %>  
-        <div class="continer d-flex align-items-center justify-content-center">
-                <div class="row"> 
-                    <h4 class="text-info ">You do not have any tasks yet.</h4><br>
-                </div>
-            </div>
-    <% } %>
+    </div>
+    <% }) %>
+<% } else{ %>  
+    <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
+        <div class="row"> 
+            <h4 class="text-info ">You do not have any tasks yet.</h4><br>
+        </div>
+    </div>
+<% } %>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/scriptsAllTasks.js"></script>
 <script src="../../js/counter.js"></script>

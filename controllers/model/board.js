@@ -1,4 +1,4 @@
-const Board = require('../../models/board');
+const Board = require( '../../models/index.js').Board;
 
 var board = module.exports = {
 
@@ -17,7 +17,7 @@ var board = module.exports = {
     delete: async function(idBoard) {
 		return await Board.destroy({
             where: {
-                idBoard: idBoard
+                id: idBoard
             }
         }).then(() => {
             return true;
@@ -31,7 +31,7 @@ var board = module.exports = {
     getById: async function(idBoard){
 		return await Board.findOne({
             where: {
-                idBoard: idBoard
+                id: idBoard
             }
         }).then(board => {
                 if(board) return board;

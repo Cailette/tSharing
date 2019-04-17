@@ -1,4 +1,6 @@
-const Task = require('../../models/task');
+const Task = require( '../../models/index.js').Task;
+const User = require( '../../models/index.js').User;
+
 var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -19,7 +21,7 @@ var task = module.exports = {
     delete: async function(idTask) {
 		return await Task.destroy({
             where: {
-                idTask: idTask
+                id: idTask
             }
         }).then(() => {
             return true;
@@ -33,7 +35,7 @@ var task = module.exports = {
     update: async function(taskData, idTask) {
 		return await Task.update(
             taskData, 
-            { where: {idTask: idTask} 
+            { where: {id: idTask} 
         }).then(() => {
             return true;
         })
@@ -46,8 +48,12 @@ var task = module.exports = {
     getById: async function(idTask) {
 		return await Task.findOne({
             where: {
-                idTask: idTask
-            }
+                id: idTask
+            },
+            include: [{
+                model: User,
+                as: 'User'
+            }]
         }).then(task => {
             if(task) return task;
             return false;
@@ -60,10 +66,15 @@ var task = module.exports = {
     getAllTasks: async function(idBoard) {
 		return await Task.findAll({
             where: {
-                idBoard: idBoard,
+                BoardId: idBoard,
                 [Op.or]: [{status: 'assigned'}, {status: 'free'}]
-            }
+            },
+            include: [{
+                model: User,
+                as: 'User'
+            }]
         }).then(task => {
+            console.log(JSON.stringify(task));
             if(task) return task;
             return false;
         })

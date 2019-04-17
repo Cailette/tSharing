@@ -35,13 +35,13 @@
                             </thead>
                             <tbody>
                                 <% teammates.forEach(function (teammate) { %>
-                                    <% if(teammate.idUser != user.idUser){ %>
+                                    <% if(teammate.id != user.id){ %>
                                         <tr>
                                             <td scope="row"><%= teammate.name%></td>
                                             <td><%= teammate.email%></td>
                                         </tr>          
                                     <% } %>     
-                                <% }) %>
+                                <% }) %> 
                             </tbody>
                         </table> 
                     <% } else{ %>  

@@ -9,8 +9,6 @@ var auth = require('../auth/auth');
 
 router.get('/', auth.authenticationMiddleware, sharingController.get);
 
-router.get('/allTasks', auth.authenticationMiddleware, allTaskController.get);
-
 router.get('/start', auth.authenticationMiddleware, sharingController.start);
 
 router.get('/account', auth.authenticationMiddleware, accountController.get);
@@ -23,10 +21,12 @@ router.get('/deleteaccount', auth.authenticationMiddleware, accountController.de
 
 router.get('/logout', sharingController.logout);
 
+router.get('/allTasks', auth.authenticationMiddleware, allTaskController.get);
+
 router.post('/addTask', auth.authenticationMiddleware, validateFormInput.validateTaskForm, allTaskController.post);
 
-router.get('/deleteTask', auth.authenticationMiddleware, allTaskController.deleteTask);
+router.put('/deleteTask', auth.authenticationMiddleware, allTaskController.deleteTask);
 
-router.get('/assignTask', auth.authenticationMiddleware, allTaskController.assignTask);
+router.put('/assignTask', auth.authenticationMiddleware, allTaskController.assignTask);
 
 module.exports = router;

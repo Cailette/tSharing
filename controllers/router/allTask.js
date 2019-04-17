@@ -19,14 +19,17 @@ var allTask = module.exports = {
             title: req.body.tTitle,
             comment: req.body.tComment,
             date: time, 
-            idUser: req.session.USER_ID,  
-            idBoard: req.session.BOARD_ID
+            UserId: req.session.USER_ID,  
+            BoardId: req.session.BOARD_ID,
+            status: 'free'
         }  
         const createdTask = await taskContoroller.create(taskData);
+        const newTask = await taskContoroller.getById(createdTask.id);
 
-        console.log('createdTask: ' + createdTask);
-        if (createdTask) {
-            res.redirect('/sharing/allTasks'); 
+        console.log('createdTask: ' + JSON.stringify(createdTask));
+        console.log('newTask: ' + JSON.stringify(newTask));
+        if (newTask) {
+            res.send({ task: newTask });
         } else {
             res.redirect('/');
         } 
@@ -48,13 +51,15 @@ var allTask = module.exports = {
         const TASK_ID = req.query.idTask;
         const taskData = {
             date: time, 
-            idUser: req.session.USER_ID,
+            UserId: req.session.USER_ID,
             status: status
         }  
         
         const updatedTask = await taskContoroller.update(taskData, TASK_ID);
+        const newTask = await taskContoroller.getById(TASK_ID);
         if (updatedTask) {
-            res.redirect('/sharing/allTasks'); 
+            console.log('newTask: ' + JSON.stringify(newTask));
+            res.send({ task: newTask });
         } else {
             res.redirect('/');
         }

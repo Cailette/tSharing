@@ -13,8 +13,8 @@ var login = module.exports = {
         if (!existU || !bcrypt.compareSync(req.body.uPassword, existU.password)) {
             res.render('login', { msg: "User does not exist." });
         } else {
-            const USER_ID = existU.idUser;
-            const BOARD_ID = existU.idBoard;
+            const USER_ID = existU.UserId;
+            const BOARD_ID = existU.BoardId;
             req.session.USER_ID = USER_ID;
             req.session.BOARD_ID = BOARD_ID;
             req.login(USER_ID, function(err) {

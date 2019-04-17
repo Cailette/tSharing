@@ -1,36 +1,22 @@
-var Sequelize = require("sequelize");
-const db = require('../db.js');
-
-module.exports = db.sequelize.define('user', {
-        idUser: { 
-            autoIncrement: true, 
-            primaryKey: true, 
-            type: Sequelize.INTEGER,
-            notEmpty: true
-        },
-        email: { 
-            type: Sequelize.STRING, 
-            validate: {isEmail:true},
-            allowNull: false,
-            notEmpty: true
-        },
-        name: { 
-            type: Sequelize.STRING,
-            notEmpty: true,
-            allowNull: false 
-        },
-        password: {
-            type: Sequelize.STRING,
-            notEmpty: true,
-            allowNull: false 
-        }, 
-        idBoard: {
-            type: Sequelize.INTEGER,
-            references:'board',
-            referencesKey:'idBoard',
-            notEmpty: true,
-            allowNull: false 
-        }
-    }, {
-        timestamps: false
-    });
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var User = sequelize.define('User', {
+    id: { type: DataTypes.INTEGER, 
+      primaryKey: true,
+      autoIncrement: true
+    },
+    email: DataTypes.STRING,
+    name: DataTypes.STRING,
+    password: DataTypes.STRING,
+    BoardId: { type: DataTypes.INTEGER,
+    references:'boards',
+    referencesKey:'id'}
+  }, {
+    timestamps: false
+  });
+  User.associate = function(models) {
+      User.hasMany(models.Task);
+      User.belongsTo(models.Board, { foreignKey: 'BoardId' });
+  };
+  return User;
+};
