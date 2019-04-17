@@ -1,6 +1,3 @@
-var Sequelize = require("sequelize");
-const userContoroller = require('../model/user');
-const boardContoroller = require('../model/board');
 const taskContoroller = require('../model/task');
 
 var allTask = module.exports = {

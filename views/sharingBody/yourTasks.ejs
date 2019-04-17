@@ -1,4 +1,5 @@
-<div class="container mt-4 py-4" id="allTasksView">
+<div class="container mt-4 py-4" id="yourTasksView">
+<hr class="w-50 my-4 " style="color: transparent;">
     <% if(tasks.length != 0){ %>
         <% tasks.forEach(function (task) { %>
         <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
@@ -36,5 +37,5 @@
     
 
 <script src="../../js/jquery.js"></script>
-<script src="../../js/scriptsAllTasks.js"></script>
+<script src="../../js/scriptsYourTasks.js"></script>
 <script src="../../js/counter.js"></script>

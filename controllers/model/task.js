@@ -82,4 +82,25 @@ var task = module.exports = {
             console.log('error: ' + err);
         })
     },
+
+    getYourTasks: async function(idBoard, idUser) {
+		return await Task.findAll({
+            where: {
+                BoardId: idBoard,
+                UserId: idUser,
+                status: 'assigned'
+            },
+            include: [{
+                model: User,
+                as: 'User'
+            }]
+        }).then(task => {
+            console.log(JSON.stringify(task));
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
 }
