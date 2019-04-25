@@ -89,6 +89,26 @@ var rate = module.exports = {
         })
     },
 
+    getRateAvg: async function(idTask) {
+		return await Rate.findOne({
+            attributes: [
+                'id', 
+                [Sequelize.fn('AVG', Sequelize.col('value')), 
+                'ratingAvg']
+            ],
+            group: ['TaskId'],
+            where: {
+                TaskId: idTask
+            }
+        }).then(rate => {
+            if(rate) return rate;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
     getUserRates: async function(idUser) {
 		return await Rate.findAll({
             where: {

@@ -18,7 +18,7 @@
                         <% if(task.status === "completed") { %>
                             <% if(task.User.id !== idUser) { %>
                                 <div class="ratings mr-1 ml-auto">
-                                    <select class="rating" id="<%= task.id %>">
+                                    <select class="rating" id="rateTask?idTask=<%= task.id %>">
                                     <% 
                                         var index = userRates.findIndex(userRate => userRate.TaskId === task.id);
                                         var userRate = userRates[index];
@@ -28,9 +28,9 @@
                                         } 
                                         for(i=1; i<=5; i++){
                                             if (value == i) { %>
-                                                <option value="<%= i %>" selected><%= i %></option> 
+                                                <option value="rateTask?idTask=<%= task.id %>&value=<%= i %>" selected><%= i %></option> 
                                             <% } else { %>
-                                                <option value="<%= i %>"><%= i %></option>
+                                                <option value="rateTask?idTask=<%= task.id %>&value=<%= i %>"><%= i %></option>
                                             <% } 
                                         }
                                     %>

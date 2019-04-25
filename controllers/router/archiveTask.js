@@ -13,15 +13,16 @@ var archiveTask = module.exports = {
 	rate: async function(req, res) {
         const TASK_ID = req.query.idTask;
         const value = req.query.value;
-		const existR = await rateContoroller.getUserRate(req.session.BOARD_ID, TASK_ID);
+		const existR = await rateContoroller.getUserRate(req.session.USER_ID, TASK_ID);
 
 		if (existR) {
 			const rateData = {
 				value: value
 			}  
 			const updatedRate = await rateContoroller.update(rateData, existR.id);
-			if (updatedRate) {
-				res.send({ rate: updatedRate });
+			const updatedAvg = await rateContoroller.getRateAvg(TASK_ID);
+			if (updatedAvg) {
+				res.send({ avg: updatedAvg });
 			} else {
 				res.redirect('/');
 			}
@@ -31,9 +32,10 @@ var archiveTask = module.exports = {
 				UserId: req.session.USER_ID,
 				TaskId: TASK_ID
 			}   
-			const createdRate = await userContoroller.create(rateData);
-			if (createdRate) {
-				res.send({ rate: createdRate });
+			const createdRate = await rateContoroller.create(rateData);
+			const updatedAvg = await rateContoroller.getRateAvg(TASK_ID);
+			if (updatedAvg) {
+				res.send({ avg: updatedAvg });
 			} else {
 				res.redirect('/');
 			}
