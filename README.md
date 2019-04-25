@@ -38,3 +38,5 @@ Functionality
 3. In the "Login" tab, you can log in to your account associated with the board shared with your friends.
 4. After logging in on the "account" tab, the user can view teammates and edit or delete the account.
 5. After logging in on the "All tasks" tab, the user can see all tasks added by the board's members. User can add new task, assign any free task to himself or delete it.
+6. After logging in on the "Your tasks" tab, the user can see all tasks assigned to him. User can complete or remove task from his board.
+7. After logging in on the "Archives" tab, the user can see all deleted or completed tasks. The user can rate completed tasks.

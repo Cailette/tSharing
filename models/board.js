@@ -1,12 +1,22 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Board = sequelize.define('Board', {
-    id: { type: DataTypes.INTEGER, 
-      primaryKey: true,
-      autoIncrement: true
+    id: { 
+        autoIncrement: true, 
+        primaryKey: true, 
+        notEmpty: true,
+        type: DataTypes.INTEGER
     },
-    name: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: { 
+        type: DataTypes.STRING,
+        notEmpty: true,
+        allowNull: false 
+    },
+    password: {
+        type: DataTypes.STRING,
+        notEmpty: true,
+        allowNull: false 
+    }
   }, {
     timestamps: false
   });

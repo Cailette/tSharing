@@ -1,5 +1,6 @@
 const Task = require( '../../models/index.js').Task;
 const User = require( '../../models/index.js').User;
+const Rate = require( '../../models/index.js').Rate;
 
 var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
@@ -49,6 +50,25 @@ var task = module.exports = {
 		return await Task.findOne({
             where: {
                 id: idTask
+            },
+            include: [{
+                model: User,
+                as: 'User'
+            }]
+        }).then(task => {
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getArchiveTasks: async function(idBoard) {
+		return await Task.findAll({
+            where: {
+                BoardId: idBoard,
+                [Op.or]: [{status: 'completed'}, {status: 'deleted'}]
             },
             include: [{
                 model: User,

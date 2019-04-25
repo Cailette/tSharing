@@ -1,7 +1,7 @@
 var expect = require('chai').expect
 const userContoroller = require('../controllers/model/user');
 
-describe('Models', function() {
+describe('Models User', function() {
 
     it('should not create user without password', async function() {
         const userData = {

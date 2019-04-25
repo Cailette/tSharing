@@ -1,7 +1,7 @@
 var expect = require('chai').expect
 const boardContoroller = require('../controllers/model/board');
 
-describe('Models', function() {
+describe('Models Board', function() {
 
     it('should not create board without password', async function() {
         const boardData = {

@@ -5,6 +5,7 @@ var sharingController = require('../controllers/router/sharing');
 var accountController = require('../controllers/router/account');
 var allTaskController = require('../controllers/router/allTask');
 var yourTaskController = require('../controllers/router/yourTask');
+var archiveTaskController = require('../controllers/router/archiveTask');
 var validateFormInput = require('../controllers/validateFormInput');
 var auth = require('../auth/auth');
 
@@ -35,5 +36,9 @@ router.get('/yourTasks', auth.authenticationMiddleware, yourTaskController.get);
 router.put('/completeTask', auth.authenticationMiddleware, yourTaskController.completeTask);
 
 router.put('/removeTask', auth.authenticationMiddleware, yourTaskController.removeTask);
+
+router.get('/archiveTasks', auth.authenticationMiddleware, archiveTaskController.get);
+
+router.put('/rateTask', auth.authenticationMiddleware, archiveTaskController.rate);
 
 module.exports = router;

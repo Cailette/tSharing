@@ -43,10 +43,6 @@ module.exports = {
           referencesKey:'id',
           notEmpty: true,
           allowNull: false 
-      },
-      rating: {
-          type: Sequelize.FLOAT,
-          allowNull: true 
       }
   });
   },

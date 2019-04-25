@@ -1,6 +1,6 @@
 const taskContoroller = require('../model/task');
 
-var allTask = module.exports = {
+var yourTask = module.exports = {
 
 	get: async function(req, res) {
         const tasks = await taskContoroller.getYourTasks(req.session.BOARD_ID, req.session.USER_ID);
@@ -8,11 +8,11 @@ var allTask = module.exports = {
 	},
 
 	removeTask: async function(req, res) {
-        allTask.updateStatus('free', req, res);
+        yourTask.updateStatus('free', req, res);
 	},
 
 	completeTask: async function(req, res) {
-        allTask.updateStatus('completed', req, res);
+        yourTask.updateStatus('completed', req, res);
 	},
 
 	updateStatus: async function(status, req, res) {

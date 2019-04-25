@@ -30,8 +30,8 @@
     <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
         <div class="card bg-light mb-3 card-block w-50 shadow-sm">
             <div class="card-header">
-                <div class="d-flex">
-                    <div class="px-2 mt-2 align-self-center">
+                <div class="d-flex align-items-center">
+                    <div class="px-2 my-2 align-self-center">
                         <h5 class="text-dark"><%= task.title %></h5>
                     </div>
                     <% if(task.status === "free") { %>

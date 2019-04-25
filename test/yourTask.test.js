@@ -15,11 +15,11 @@ let res = {
     }
 };
 
-describe('Unit testing the /allTask route', function() {
+describe('Unit testing the /yourTask route', function() {
 
      it('should return ERR status for not loged in user', function() {
         return request(app)
-          .get('/allTasks')
+          .get('/yourTasks')
           .then(function(response){
               assert.equal(response.status, 404)
           })

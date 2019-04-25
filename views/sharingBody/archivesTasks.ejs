@@ -1,0 +1,86 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
+<link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars.css" rel="stylesheet"/>
+
+<div class="container mt-4 py-4" id="allTasksView">
+    <hr class="w-50 my-4">
+
+    <% if(tasks.length != 0){ %>
+        <% tasks.forEach(function (task) { %>
+        <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
+            <div class="card bg-light mb-3 card-block w-50 shadow-sm">
+                <div class="card-header">
+                    <div class="d-flex  align-items-center">
+                        <div class="px-2 my-2 align-self-center">
+                            <h5 class="text-dark"><%= task.title %></h5>
+                        </div>
+                        <% if(task.status === "completed") { %>
+                            <% if(task.User.id !== idUser) { %>
+                                <div class="ratings mr-1 ml-auto">
+                                    <select class="rating" id="<%= task.id %>">
+                                    <% 
+                                        var index = userRates.findIndex(userRate => userRate.TaskId === task.id);
+                                        var userRate = userRates[index];
+                                        var value = 0;
+                                        if (typeof userRate != "undefined") {
+                                            value = parseInt(userRate.getDataValue('value'));
+                                        } 
+                                        for(i=1; i<=5; i++){
+                                            if (value == i) { %>
+                                                <option value="<%= i %>" selected><%= i %></option> 
+                                            <% } else { %>
+                                                <option value="<%= i %>"><%= i %></option>
+                                            <% } 
+                                        }
+                                    %>
+                                    </select>                        
+                                </div>
+                            <% } %>
+                            <div class="ml-auto align-self-center text-secondary" id="avg<%= task.id %>">
+                                <% 
+                                    var index = tasksRates.findIndex(taskRate => taskRate.Task.id === task.id);
+                                    var rate = tasksRates[index];
+                                    if (typeof rate != "undefined") { %>
+                                        <%= rate.getDataValue('ratingAvg').slice(0, -2) %>
+                                <% } else{ %>
+                                    <%= 'No rating yet' %>
+                            <% } %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="card-body bg-white">
+                    <%if (task.comment !== "") { %>
+                        <div class="row px-2" style="white-space: pre-wrap;">
+                            <p><%= task.comment %></p>
+                        </div> 
+                    <% } %>
+                    <div class="row d-flex px-4 dataRow" id="dataRow<%= task.id %>">
+                        <% if(task.status === "completed") { %>
+                            <span class="badge badge-pill badge-light ml-auto">
+                                Completed by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
+                            </span>
+                        <% } %>
+                        <% if(task.status === "deleted") { %>
+                            <span class="badge badge-pill badge-light ml-auto">
+                                Deleted by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
+                            </span>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+    <% } else{ %>  
+        <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
+            <div class="row"> 
+                <h4 class="text-info ">You do not have any tasks in archive yet.</h4><br>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!-- <script src="../../js/jquery.js"></script> -->
+<script src="../../js/scriptsArchiveTasks.js"></script>
