@@ -64,16 +64,17 @@ var task = module.exports = {
         })
     },
 
-    getArchiveTasks: async function(idBoard) {
+    getTasksWithOptions: async function(idBoard, order, options) {
 		return await Task.findAll({
             where: {
                 BoardId: idBoard,
-                [Op.or]: [{status: 'completed'}, {status: 'deleted'}]
+                [Op.or]: options
             },
             include: [{
                 model: User,
                 as: 'User'
-            }]
+            }], 
+            order: order,
         }).then(task => {
             if(task) return task;
             return false;
@@ -83,18 +84,19 @@ var task = module.exports = {
         })
     },
 
-    getAllTasks: async function(idBoard) {
+    getUserTasksWithOptions: async function(idBoard, idUser, order, options) {
 		return await Task.findAll({
             where: {
                 BoardId: idBoard,
-                [Op.or]: [{status: 'assigned'}, {status: 'free'}]
+                UserId: idUser,
+                [Op.or]: options
             },
             include: [{
                 model: User,
                 as: 'User'
-            }]
+            }], 
+            order: order,
         }).then(task => {
-            console.log(JSON.stringify(task));
             if(task) return task;
             return false;
         })

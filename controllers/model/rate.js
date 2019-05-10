@@ -80,7 +80,6 @@ var rate = module.exports = {
                 }
             }]
         }).then(rate => {
-            console.log('rate: ' + JSON.stringify(rate));
             if(rate) return rate;
             return false;
         })
@@ -131,7 +130,6 @@ var rate = module.exports = {
                 TaskId: idTask
             }
         }).then(rate => {
-            console.log('rate: ' + JSON.stringify(rate));
             if(rate) return rate;
             return false;
         })

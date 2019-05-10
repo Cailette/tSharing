@@ -25,6 +25,8 @@ router.get('/logout', sharingController.logout);
 
 router.get('/allTasks', auth.authenticationMiddleware, allTaskController.get);
 
+router.get('/filterAndSortAllTasks', auth.authenticationMiddleware, allTaskController.filterAndSort);
+
 router.post('/addTask', auth.authenticationMiddleware, validateFormInput.validateTaskForm, allTaskController.post);
 
 router.put('/deleteTask', auth.authenticationMiddleware, allTaskController.deleteTask);
@@ -38,6 +40,8 @@ router.put('/completeTask', auth.authenticationMiddleware, yourTaskController.co
 router.put('/removeTask', auth.authenticationMiddleware, yourTaskController.removeTask);
 
 router.get('/archiveTasks', auth.authenticationMiddleware, archiveTaskController.get);
+
+router.get('/filterAndSortArchiveTasks', auth.authenticationMiddleware, archiveTaskController.filterAndSort);
 
 router.put('/rateTask', auth.authenticationMiddleware, archiveTaskController.rate);
 

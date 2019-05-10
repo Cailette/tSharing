@@ -1,76 +1,107 @@
-<div class="container mt-4 py-4" id="allTasksView">
-<form id="addTaskForm">
-    <div class="form-group row w-50 my-4 mx-auto">
-        <div class="col-md-10">   
-            <div class="row">
-                <input class="form-control shadow-sm" id="tTitle" type="text" placeholder="Task" name="tTitle" maxlength="45" required>
-            </div>
-            <div class="row mt-2">
-                <textarea class="form-control shadow-sm" id="tComment" placeholder="Comment" name="tComment" maxlength="500" rows="2"></textarea>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-outline-info  bg-light" title="Add new task" id="addTask"><span class="small">Add</span></button>
-            <div class="mt-2" id="countTopic">
-                <span id="currentTopic">0</span>
-                <span id="maximumTopic">/45</span>
-            </div>
-            <div id="countComment">
-                <span id="currentComment">0</span>
-                <span id="maximumComment">/500</span>
-            </div>
-        </div>
-    </div>
-</form>
-
-<hr class="w-50 my-4">
-
-<% if(tasks.length != 0){ %>
-    <% tasks.forEach(function (task) { %>
-    <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
-        <div class="card bg-light mb-3 card-block w-50 shadow-sm">
-            <div class="card-header">
-                <div class="d-flex align-items-center">
-                    <div class="px-2 my-2 align-self-center">
-                        <h5 class="text-dark"><%= task.title %></h5>
-                    </div>
-                    <% if(task.status === "free") { %>
-                        <div class="btns px-2 ml-auto" id="btns<%= task.id %>">
-                            <div class="idAssign btn btn-outline-success m-2 bg-light" id="assignTask?idTask=<%= task.id %>"  title="Take the task"><span class="small">Assign</span></div>
-                            <div class="idDelete btn btn-outline-danger m-2 bg-light" id="deleteTask?idTask=<%= task.id %>" title="Delete the task"><span class="small">Delete</span></div>
+<div class="container mt-4">
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="sticky-top">
+                <form id="addTaskForm" class="px-2">
+                    <div class="form-group">
+                        <div class="row">
+                            <span class="mr-2 badge badge-light">Words limit: </span>
+                            <div id="countTopic" class="mr-2 badge badge-light">
+                                <span id="currentTopic">0</span>
+                                <span id="maximumTopic">/45</span>
+                            </div>
+                            <div id="countComment" class="badge badge-light">
+                                <span id="currentComment">0</span>
+                                <span id="maximumComment">/500</span>
+                            </div>
                         </div>
-                    <% } %>
-                </div>
-            </div>
-            <div class="card-body bg-white">
-                <%if (task.comment !== "") { %>
-                    <div class="row px-2" style="white-space: pre-wrap;">
-                        <p><%= task.comment %></p>
-                    </div> 
-                <% } %>
-                <div class="row d-flex px-4 dataRow" id="dataRow<%= task.id %>">
-                    <% if(task.status === "assigned") { %>
-                        <span class="badge badge-pill badge-light ml-auto">
-                            Assigned to: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
-                        </span>
-                    <% } %>
-                    <% if(task.status === "free") { %>
-                        <span class="badge badge-pill badge-light ml-auto">
-                            Added by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
-                        </span>
-                    <% } %>
+                        <div class="row mt-2">
+                            <input class="form-control shadow-sm" id="tTitle" type="text" placeholder="Task" name="tTitle" maxlength="45" required>
+                        </div>
+                        <div class="row mt-2">
+                            <textarea class="form-control shadow-sm" id="tComment" placeholder="Comment" name="tComment" maxlength="500" rows="2"></textarea>
+                        </div>
+                        <div class="row mt-2 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-warning px-4 d-flex justify-content-end" title="Add new task" id="addTask"><span class="small">Add</span></button>
+                        </div>
+                    </div>
+                </form>
+            
+                <div class="container mt-4 py-0 px-2" id="sortAndFilterContainer">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col p-0">
+                        Filter tasks by:
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col form-group p-0 ml-3">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=all" name="filterRadio" class="custom-control-input sortAndFilter" checked>
+                                    <label class="custom-control-label" for="status=all">All</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=free" name="filterRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="status=free">Free</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=assigned" name="filterRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="status=assigned">Assigned</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col p-0">
+                            <select class="custom-select sortAndFilter" id="filterSelect">
+                                <option value="user=all" selected>All</option>
+                                <% teammates.forEach(function (teammate) { %>
+                                    <option value="user=<%= teammate.id %>"><%= teammate.name%></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="row justify-content-center align-items-center my-4">
+                        <div class="form-group p-0">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col">
+                                    Sort tasks by:
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col">
+                                    Date:
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=date&order=ASC" name="sortRadio" class="custom-control-input sortAndFilter" checked>
+                                    <label class="custom-control-label" for="sort=date&order=ASC">Ascending</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=date&order=DESC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=date&order=DESC">Descending</label>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col">
+                                    Title:
+                                </div>
+                                <div class="col custom-control custom-radio">                    
+                                    <input type="radio" id="sort=title&order=ASC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=title&order=ASC">Ascending</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=title&order=DESC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=title&order=DESC">Descending</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <% }) %>
-<% } else{ %>  
-    <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
-        <div class="row"> 
-            <h4 class="text-info ">You do not have any tasks yet.</h4><br>
+        <div class="col-md-8 px-4 content">
+            <div class="container" id="allTasksView">
+                
+            </div>
         </div>
     </div>
-<% } %>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 

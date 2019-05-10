@@ -40,3 +40,4 @@ Functionality
 5. After logging in on the "All tasks" tab, the user can see all tasks added by the board's members. User can add new task, assign any free task to himself or delete it.
 6. After logging in on the "Your tasks" tab, the user can see all tasks assigned to him. User can complete or remove task from his board.
 7. After logging in on the "Archives" tab, the user can see all deleted or completed tasks. The user can rate completed tasks.
+8. User can filter and sort tasks in the "Archives" and "All tasks" tabs. Filter by user name and status, sort by date or title.

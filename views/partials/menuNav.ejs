@@ -6,19 +6,19 @@
     
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item <% if (page === 'yourTasks') { %>active<% } %>">
                 <a class="nav-link" href="/sharing/yourTasks">Your tasks</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <% if (page === 'allTasks') { %>active<% } %>">
                 <a class="nav-link" href="/sharing/allTasks">All tasks</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <% if (page === 'archivesTasks') { %>active<% } %>">
                 <a class="nav-link" href="/sharing/archiveTasks">Archives</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <% if (page === 'account') { %>active<% } %>">
                 <a class="nav-link" href="/sharing/account">Account</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <% if (page === 'statistics') { %>active<% } %>">
                 <a class="nav-link" href="#">Statistics</a>
             </li>
             <li class="nav-item">

@@ -1,37 +1,42 @@
-<div class="container mt-4 py-4" id="yourTasksView">
-<hr class="w-50 my-4 " style="color: transparent;">
-    <% if(tasks.length != 0){ %>
-        <% tasks.forEach(function (task) { %>
-        <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
-            <div class="card bg-light mb-3 card-block w-50 shadow-sm">
-                <div class="card-header">
-                    <div class="d-flex">
-                        <div class="px-2 my-2 align-self-center">
-                            <h5 class="text-dark"><%= task.title %></h5>
+<div class="container mt-4" id="yourTasksView">
+    <div class="row">
+        <div class="col-md-2 m-2"></div>
+            <div class="col-md-8 px-2">
+                    <% if(tasks.length != 0){ %>
+                        <% tasks.forEach(function (task) { %>
+                        <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
+                            <div class="card bg-light mb-3 card-block w-100 shadow-sm">
+                                <div class="card-header">
+                                    <div class="d-flex">
+                                        <div class="col px-2 my-2 align-self-center">
+                                            <h5 class="text-dark"><%= task.title %></h5>
+                                        </div>
+                                        <div class="col-4 btns ml-auto" id="btns<%= task.id %>" >
+                                            <div class="idComplete btn btn-primary m-1" id="completeTask?idTask=<%= task.id %>"  title="Complete the task"><span class="small">Complete</span></div>
+                                            <div class="idRemove btn btn-warning m-1" id="removeTask?idTask=<%= task.id %>" title="Remove the task from your list"><span class="small">Remove</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body bg-white">
+                                    <%if (task.comment !== "") { %>
+                                        <div class="row px-2" style="white-space: pre-wrap;">
+                                            <p><%= task.comment %></p>
+                                        </div> 
+                                    <% } %>
+                                </div>
+                            </div>
                         </div>
-                        <div class="btns px-2 ml-auto" id="btns<%= task.id %>">
-                            <div class="idComplete btn btn-outline-success m-2 bg-light" id="completeTask?idTask=<%= task.id %>"  title="Complete the task"><span class="small">Complete</span></div>
-                            <div class="idRemove btn btn-outline-danger m-2 bg-light" id="removeTask?idTask=<%= task.id %>" title="Remove the task from your list"><span class="small">Remove</span></div>
+                        <% }) %>
+                    <% } else{ %>  
+                        <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
+                            <div class="row"> 
+                                <h4 class="text-info ">You do not have any assigned tasks yet.</h4><br>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-body bg-white">
-                    <%if (task.comment !== "") { %>
-                        <div class="row px-2" style="white-space: pre-wrap;">
-                            <p><%= task.comment %></p>
-                        </div> 
                     <% } %>
-                </div>
             </div>
-        </div>
-        <% }) %>
-    <% } else{ %>  
-        <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
-            <div class="row"> 
-                <h4 class="text-info ">You do not have any assigned tasks yet.</h4><br>
-            </div>
-        </div>
-    <% } %>
+        <div class="col-md-2 m-2"></div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     

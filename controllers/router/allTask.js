@@ -1,11 +1,45 @@
 const taskContoroller = require('../model/task');
+userContoroller = require('../model/user');
 
 var allTask = module.exports = {
 
 	get: async function(req, res) {
-        const tasks = await taskContoroller.getAllTasks(req.session.BOARD_ID);
-		res.render('sharing', { page: 'allTasks', tasks: tasks }); 
-	},
+        const order = [['date', 'ASC']];
+        const options = [{status: 'assigned'}, {status: 'free'}];
+        const tasks = await taskContoroller.getTasksWithOptions(req.session.BOARD_ID, order, options);
+        const teammates = await userContoroller.getTeammates(req.session.BOARD_ID, req.session.USER_ID);
+		res.render('sharing', { page: 'allTasks', tasks: tasks, teammates: teammates }); 
+    },
+    
+	filterAndSort: async function(req, res) {
+        const BOARD_ID = req.session.BOARD_ID
+        const user = req.query.user;
+        const order = [[req.query.sort, req.query.order]];
+        const status = [{status: req.query.status}];
+        const options = [{status: 'assigned'}, {status: 'free'}];
+        var tasks = [];
+        
+        if(user == 'all'){
+            if(req.query.status == 'all'){
+                tasks = await taskContoroller.getTasksWithOptions(BOARD_ID, order, options);
+            } else {
+                tasks = await taskContoroller.getTasksWithOptions(BOARD_ID, order, status);
+            }
+        } else {
+            if(req.query.status == 'all'){
+                tasks = await taskContoroller.getUserTasksWithOptions(BOARD_ID, user, order, options);
+            } else {
+                tasks = await taskContoroller.getUserTasksWithOptions(BOARD_ID, user, order, status);
+            }
+        }
+
+        console.log("tasks: " + JSON.stringify(tasks));
+        if (tasks) {
+            res.send({ tasks: tasks });
+        } else {
+            res.redirect('/');
+        } 
+    },
 
 	post: async function(req, res) {
         var timeNow = new Date().timeNow();

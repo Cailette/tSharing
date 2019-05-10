@@ -1,61 +1,67 @@
-<div class="continer d-flex align-items-center justify-content-center">
-    <div class="continer-fluid" style="min-width: 750px; margin-top: 80px;">
-        <div class="row bg-white shadow-sm p-3 m-4">
-            <div class="col-auto mr-auto">
-                <h1 class="text-danger"><strong><%= board.name %></strong></h1>
-                <h6 class="mt-4 p-2"><strong>Your name: </strong><%= user.name %></h6>
-                <h6 class="mt-2 p-2"><strong>Email: </strong><%= user.email %></h6>
-            </div>
-            <div class="col-auto">
-                <div class="btn-group">
-                    <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
-                        Action 
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="p-2"><a href="/sharing/editaccount">Edit account</a></li>
-                        <li class="p-2"><a href="" data-toggle="modal" data-target="#deleteAlert">Delete account</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <% include deleteAccount.ejs %>
-
-        <div class="row bg-white shadow-sm p-4 m-4" style="min-height: 300px">
-            <div class="col">
-                <div class="row d-flex p-4">
-                    <% if(teammates.length > 1){ %>
-                        <h3 class="text-primary"><strong>Your teammates:</strong></h3>
-                        <table class="table table-hover mt-3">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Usename</th>
-                                    <th scope="col">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% teammates.forEach(function (teammate) { %>
-                                    <% if(teammate.id != user.id){ %>
-                                        <tr>
-                                            <td scope="row"><%= teammate.name%></td>
-                                            <td><%= teammate.email%></td>
-                                        </tr>          
-                                    <% } %>     
-                                <% }) %> 
-                            </tbody>
-                        </table> 
-                    <% } else{ %>  
-                        <div class="grid">
-                                <div class="row">
-                                        <h4 class="text-info ">You do not have any companions yet.</h4><br>
-                                </div>
-                                <div class="row">
-                                        <h5 class="text">Invite Your friends!</h5>
-                                </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-2 m-2"></div>
+            <div class="col-md-8 px-2">
+                <div class="continer-fluid">
+                    <div class="row bg-white shadow-sm p-3 m-4 rounded">
+                        <div class="col-auto mr-auto">
+                            <h1 class="text-warning"><strong><%= board.name %></strong></h1>
+                            <h6 class="mt-4 p-2"><strong>Your name: </strong><%= user.name %></h6>
+                            <h6 class="mt-2 p-2"><strong>Email: </strong><%= user.email %></h6>
+                        </div>
+                        <div class="col-auto">
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+                                    Action 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="p-2"><a href="/sharing/editaccount">Edit account</a></li>
+                                    <li class="p-2"><a href="" data-toggle="modal" data-target="#deleteAlert">Delete account</a></li>
+                                </ul>
                             </div>
-                    <% } %>
+                        </div>
+                    </div>
+
+                    <% include deleteAccount.ejs %>
+
+                    <div class="row bg-white shadow-sm p-4 m-4 rounded" >
+                        <div class="col">
+                            <div class="row d-flex p-4">
+                                <% if(teammates.length > 1){ %>
+                                    <h3 class="text-primary"><strong>Your teammates:</strong></h3>
+                                    <table class="table table-hover mt-3">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Usename</th>
+                                                <th scope="col">Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% teammates.forEach(function (teammate) { %>
+                                                <% if(teammate.id != user.id){ %>
+                                                    <tr>
+                                                        <td scope="row"><%= teammate.name%></td>
+                                                        <td><%= teammate.email%></td>
+                                                    </tr>          
+                                                <% } %>     
+                                            <% }) %> 
+                                        </tbody>
+                                    </table> 
+                                <% } else{ %>  
+                                    <div class="grid">
+                                            <div class="row">
+                                                    <h4 class="text-info ">You do not have any companions yet.</h4><br>
+                                            </div>
+                                            <div class="row">
+                                                    <h5 class="text">Invite Your friends!</h5>
+                                            </div>
+                                        </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        <div class="col-md-2 m-2"></div>
     </div>
 </div>

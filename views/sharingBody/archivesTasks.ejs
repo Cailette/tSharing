@@ -3,84 +3,89 @@
 <script src="http://antenna.io/demo/jquery-bar-rating/jquery.barrating.js"></script>
 <link href="http://antenna.io/demo/jquery-bar-rating/dist/themes/fontawesome-stars.css" rel="stylesheet"/>
 
-<div class="container mt-4 py-4" id="allTasksView">
-    <hr class="w-50 my-4">
-
-    <% if(tasks.length != 0){ %>
-        <% tasks.forEach(function (task) { %>
-        <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
-            <div class="card bg-light mb-3 card-block w-50 shadow-sm">
-                <div class="card-header">
-                    <div class="d-flex  align-items-center">
-                        <div class="px-2 my-2 align-self-center">
-                            <h5 class="text-dark"><%= task.title %></h5>
+<div class="container mt-4">
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="sticky-top">
+                <div class="container py-0 px-2" id="sortAndFilterContainer">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col p-0">
+                        Filter tasks by:
                         </div>
-                        <% if(task.status === "completed") { %>
-                            <% if(task.User.id !== idUser) { %>
-                                <div class="ratings mr-1 ml-auto">
-                                    <select class="rating" id="rateTask?idTask=<%= task.id %>">
-                                    <% 
-                                        var index = userRates.findIndex(userRate => userRate.TaskId === task.id);
-                                        var userRate = userRates[index];
-                                        var value = 0;
-                                        if (typeof userRate != "undefined") {
-                                            value = parseInt(userRate.getDataValue('value'));
-                                        } 
-                                        for(i=1; i<=5; i++){
-                                            if (value == i) { %>
-                                                <option value="rateTask?idTask=<%= task.id %>&value=<%= i %>" selected><%= i %></option> 
-                                            <% } else { %>
-                                                <option value="rateTask?idTask=<%= task.id %>&value=<%= i %>"><%= i %></option>
-                                            <% } 
-                                        }
-                                    %>
-                                    </select>                        
+                        <div class="w-100"></div>
+                        <div class="col form-group p-0 ml-3">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=all" name="filterRadio" class="custom-control-input sortAndFilter" checked>
+                                    <label class="custom-control-label" for="status=all">All</label>
                                 </div>
-                            <% } %>
-                            <div class="ml-auto align-self-center text-secondary" id="avg<%= task.id %>">
-                                <% 
-                                    var index = tasksRates.findIndex(taskRate => taskRate.Task.id === task.id);
-                                    var rate = tasksRates[index];
-                                    if (typeof rate != "undefined") { %>
-                                        <%= rate.getDataValue('ratingAvg').slice(0, -2) %>
-                                <% } else{ %>
-                                    <%= 'No rating yet' %>
-                            <% } %>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=completed" name="filterRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="status=completed">Completed</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="status=deleted" name="filterRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="status=deleted">Deleted</label>
+                                </div>
                             </div>
-                        <% } %>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col p-0">
+                            <select class="custom-select sortAndFilter" id="filterSelect">
+                                <option value="user=all" selected>All</option>
+                                <% teammates.forEach(function (teammate) { %>
+                                    <option value="user=<%= teammate.id %>"><%= teammate.name%></option>
+                                <% }) %>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body bg-white">
-                    <%if (task.comment !== "") { %>
-                        <div class="row px-2" style="white-space: pre-wrap;">
-                            <p><%= task.comment %></p>
-                        </div> 
-                    <% } %>
-                    <div class="row d-flex px-4 dataRow" id="dataRow<%= task.id %>">
-                        <% if(task.status === "completed") { %>
-                            <span class="badge badge-pill badge-light ml-auto">
-                                Completed by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
-                            </span>
-                        <% } %>
-                        <% if(task.status === "deleted") { %>
-                            <span class="badge badge-pill badge-light ml-auto">
-                                Deleted by: <span class="text-danger"><%= task.User.name %></span>, <%= task.date %>
-                            </span>
-                        <% } %>
+            
+                    <div class="row justify-content-center align-items-center my-4">
+                        <div class="form-group p-0">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col">
+                                    Sort tasks by:
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col">
+                                    Date:
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=date&order=ASC" name="sortRadio" class="custom-control-input sortAndFilter" checked>
+                                    <label class="custom-control-label" for="sort=date&order=ASC">Ascending</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=date&order=DESC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=date&order=DESC">Descending</label>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col">
+                                    Title:
+                                </div>
+                                <div class="col custom-control custom-radio">                    
+                                    <input type="radio" id="sort=title&order=ASC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=title&order=ASC">Ascending</label>
+                                </div>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="sort=title&order=DESC" name="sortRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="sort=title&order=DESC">Descending</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <% }) %>
-    <% } else{ %>  
-        <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
-            <div class="row"> 
-                <h4 class="text-info ">You do not have any tasks in archive yet.</h4><br>
+        <div class="col-md-8 px-4">
+            <div class="container" id="archiveTasksView">
+                
             </div>
         </div>
-    <% } %>
+    </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<!-- <script src="../../js/jquery.js"></script> -->
+
+<script src="../../js/jquery.js"></script>
 <script src="../../js/scriptsArchiveTasks.js"></script>
+    
