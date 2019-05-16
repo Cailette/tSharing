@@ -1,5 +1,8 @@
 const User = require( '../../models/index.js').User;
 
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 var user = module.exports = {
     
     create: async function(userData) {
@@ -84,4 +87,37 @@ var user = module.exports = {
         })
     },
 
+    countUsers: async function(idBoard) {
+		return await User.findOne({
+            attributes: [
+                [Sequelize.fn('COUNT', Sequelize.col('id')),'qty']
+            ],
+            where: {
+                BoardId: idBoard
+            }
+        }).then(user => {
+            if(user) return user.get('qty');
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getUserNames: async function(idBoard) {
+		return await User.findAll({
+            attributes: [
+                "name"
+            ],
+            where: {
+                BoardId: idBoard
+            }
+        }).then(user => {
+            if(user) return user;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
 }

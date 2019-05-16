@@ -56,9 +56,7 @@ var allTask = module.exports = {
         }  
         const createdTask = await taskContoroller.create(taskData);
         const newTask = await taskContoroller.getById(createdTask.id);
-
-        console.log('createdTask: ' + JSON.stringify(createdTask));
-        console.log('newTask: ' + JSON.stringify(newTask));
+        
         if (newTask) {
             res.send({ task: newTask });
         } else {

@@ -72,7 +72,8 @@ var task = module.exports = {
             },
             include: [{
                 model: User,
-                as: 'User'
+                as: 'User',
+                attributes: ['id','email','name']
             }], 
             order: order,
         }).then(task => {
@@ -93,7 +94,8 @@ var task = module.exports = {
             },
             include: [{
                 model: User,
-                as: 'User'
+                as: 'User',
+                attributes: ['id','email','name']
             }], 
             order: order,
         }).then(task => {
@@ -114,10 +116,55 @@ var task = module.exports = {
             },
             include: [{
                 model: User,
-                as: 'User'
+                as: 'User',
+                attributes: ['id','email','name']
             }]
         }).then(task => {
             console.log(JSON.stringify(task));
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    countTasks: async function(idBoard) {
+		return await Task.findAll({
+            attributes: [
+                'status', 
+                [Sequelize.fn('COUNT', Sequelize.col('status')),'quantity']
+            ],
+            group: ['status'],
+            where: {
+                BoardId: idBoard
+            }
+        }).then(task => {
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getUsersStats: async function(idBoard) {
+		return await Task.findAll({
+            attributes: [
+                'status', 
+                [Sequelize.fn('COUNT', Sequelize.col('status')), 
+                'quantity']
+            ],
+            group: ['status','UserId'],
+            include: [{
+                model: User,
+                as: 'User',
+                where: {
+                    BoardId: idBoard
+                },
+                attributes: ['id','name']
+            }]
+        }).then(task => {
             if(task) return task;
             return false;
         })

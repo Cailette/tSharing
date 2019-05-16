@@ -5,8 +5,8 @@
                 <div class="continer-fluid">
                     <div class="row bg-white shadow-sm p-3 m-4 rounded">
                         <div class="col-auto mr-auto">
-                            <h1 class="text-warning"><strong><%= board.name %></strong></h1>
-                            <h6 class="mt-4 p-2"><strong>Your name: </strong><%= user.name %></h6>
+                            <h1 class="text-warning" id="boardName"><strong><%= board.name %></strong></h1>
+                            <h6 class="mt-4 p-2" id="userName"><strong>Your name: </strong><%= user.name %></h6>
                             <h6 class="mt-2 p-2"><strong>Email: </strong><%= user.email %></h6>
                         </div>
                         <div class="col-auto">
@@ -15,8 +15,8 @@
                                     Action 
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="p-2"><a href="/sharing/editaccount">Edit account</a></li>
-                                    <li class="p-2"><a href="" data-toggle="modal" data-target="#deleteAlert">Delete account</a></li>
+                                    <li class="p-2"><a href="/sharing/editaccount" id="edit">Edit account</a></li>
+                                    <li class="p-2"><a href="" data-toggle="modal" data-target="#deleteAlert" id="delete">Delete account</a></li>
                                 </ul>
                             </div>
                         </div>

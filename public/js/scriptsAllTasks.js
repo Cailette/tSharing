@@ -13,7 +13,7 @@ $(function() {
                 tComment: $('#tComment').val(),
                 }),
             success: function(response) {
-                $(this).closest('form').trigger('reset');
+                $("#addTaskForm").trigger('reset');
 
                 var new_item = $("<div class='row justify-content-center align-items-center mb-4 taskRow' id='" + response.task.id + "'>\
                                     <div class='card bg-light mb-3 card-block w-100 shadow-sm'>\
@@ -22,7 +22,7 @@ $(function() {
                                                 <div class='px-2 mt-2 align-self-center'>\
                                                     <h5 class='text-dark'>" + response.task.title + "</h5>\
                                                 </div>\
-                                                <div class='btns ml-auto' id='btns" + task.id + " style='min-width: 140px;'>\
+                                                <div class='btns ml-auto' id='btns" + response.task.id + " style='min-width: 140px;'>\
                                                 <div class='idAssign btn btn-primary m-1' id='assignTask?idTask=" + response.task.id + "'  title='Take the task'><span class='small'>Assign</span></div>\
                                                 <div class='idDelete btn btn-warning m-1' id='deleteTask?idTask=" + response.task.id + "' title='Delete the task'><span class='small'>Delete</span></div>\
                                                 </div>\
@@ -107,7 +107,7 @@ $(function() {
                                                             <div class='px-2 mt-2 align-self-center'>\
                                                                 <h5 class='text-dark'>" + task.title + "</h5>\
                                                             </div>\
-                                                            <div class='btns ml-auto' id='btns" + task.id + " style='min-width: 140px;'>\
+                                                            <div class='btns ml-auto' id='btns" + task.id + "' style='min-width: 140px;'>\
                                                                 <div class='idAssign btn btn-primary m-1' id='assignTask?idTask=" + task.id + "'  title='Take the task'><span class='small'>Assign</span></div>\
                                                                 <div class='idDelete btn btn-warning m-1' id='deleteTask?idTask=" + task.id + "' title='Delete the task'><span class='small'>Delete</span></div>\
                                                             </div>\

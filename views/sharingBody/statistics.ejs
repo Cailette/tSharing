@@ -1,0 +1,176 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-2 m-2"></div>
+            <div class="col-md-8 px-2">
+                <div class="continer-fluid">
+                
+                    <div class="row bg-white shadow-sm p-4 rounded" >
+                        <div class="col">
+                            <div class="text-center">
+                                <h2 class="my-5 h2">Board Statistics</h2>
+                            </div>
+                        
+                            <div class="row">
+                                <div class="col-lg-3 mb-4">
+                                    <div class="text-center">
+                                        <h2 class="h1 mb-0">
+                                            <% if(numberOfUsers > 1) { %>
+                                                <%=numberOfUsers%> 
+                                            <% } else { %>
+                                                0
+                                            <% }%>
+                                        </h2>
+                                        <p><strong>Users</strong></p>
+                                    </div>
+                                </div>
+                                <%
+                                    var index = numberOfTasks.findIndex(number => number.status === 'assigned');
+                                    var numberOfAssigned = numberOfTasks[index];
+
+                                    index = numberOfTasks.findIndex(number => number.status === 'completed');
+                                    var numberOfCompleted = numberOfTasks[index];
+
+                                    index = numberOfTasks.findIndex(number => number.status === 'deleted');
+                                    var numberOfDeleted = numberOfTasks[index];
+                                %>
+                                <div class="col-lg-3 mb-4">
+                                    <div class="text-center">
+                                        <h2 class="h1 mb-0">
+                                        <% if (typeof numberOfAssigned != "undefined") { %> 
+                                            <%= parseInt(numberOfAssigned.get("quantity"))%>
+                                        <% } else { %>
+                                            0
+                                        <% }%>
+                                        </h2>
+                                        <p><strong>Assigned</strong></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3 mb-4">
+                                    <div class="text-center">
+                                        <h2 class="h1 mb-0">
+                                        <% if (typeof numberOfCompleted != "undefined") { %> 
+                                            <%= parseInt(numberOfCompleted.get("quantity"))%>
+                                        <% } else { %>
+                                            0
+                                        <% }%>
+                                        </h2>
+                                        <p><strong>Completed</strong></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-3 mb-4">
+                                    <div class="text-center">
+                                        <h2 class="h1 mb-0">
+                                        <% if (typeof numberOfDeleted != "undefined") { %> 
+                                            <%= parseInt(numberOfDeleted.get("quantity"))%>
+                                        <% } else { %>
+                                            0
+                                        <% }%>
+                                        </h2>
+                                        <p><strong>Deleted</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="text-center">
+                                <h2 class="mt-5 h2">Users Statistics</h2>
+                            </div>
+
+                            <div class="row d-flex p-2">
+                                <% if(teammates.length > 1){ %>
+                                    <table class="table table-hover mt-3">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="row text-center">
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Completed</p>
+                                                            <canvas id="completedChart"></canvas>
+                                                        </div>
+                                                        <div class="w-100"></div>
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Assigned</p>
+                                                            <canvas id="assignedChart"></canvas>
+                                                        </div>
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Deleted</p>
+                                                            <canvas id="deletedChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% teammates.forEach(function (teammate) { %>
+                                                <%
+                                                    var index = numberOfUsersStats.findIndex(number => number.status === 'assigned' && number.User.id === teammate.id);
+                                                    var numberOfAssigned = numberOfUsersStats[index];
+
+                                                    index = numberOfUsersStats.findIndex(number => number.status === 'completed' && number.User.id === teammate.id);
+                                                    var numberOfCompleted = numberOfUsersStats[index];
+
+                                                    index = numberOfUsersStats.findIndex(number => number.status === 'deleted' && number.User.id === teammate.id);
+                                                    var numberOfDeleted = numberOfUsersStats[index];
+                                                %>
+                                                <tr>
+                                                    <td class="stat w-5 font-weight-bold" style="cursor: pointer;" scope="row" colspan="3"><%= teammate.name%></td>
+                                                </tr>
+                                                <tr id="<%=teammate.id%>" style="display: none;">
+                                                    <td>
+                                                        <h4 class="h4 mb-0 text-warning">
+                                                            <% if (typeof numberOfAssigned != "undefined") { %> 
+                                                                <%= parseInt(numberOfAssigned.get("quantity"))%>
+                                                            <% } else { %>
+                                                                0
+                                                            <% }%>
+                                                        </h4>
+                                                        <p>Assigned</p>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="h4 mb-0 text-danger">
+                                                            <% if (typeof numberOfCompleted != "undefined") { %> 
+                                                                <%= parseInt(numberOfCompleted.get("quantity"))%>
+                                                            <% } else { %>
+                                                                0
+                                                            <% }%>
+                                                        </h4>
+                                                        <p>Completed</p>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="h4 mb-0 text-info">
+                                                            <% if (typeof numberOfDeleted != "undefined") { %> 
+                                                                <%= parseInt(numberOfDeleted.get("quantity"))%>
+                                                            <% } else { %>
+                                                                0
+                                                            <% }%>
+                                                        </h4>
+                                                        <p>Deleted</p>
+                                                    </td>
+                                                </tr>
+                                            <% }) %> 
+                                        </tbody>
+                                    </table> 
+                                <% } else{ %>  
+                                    <div class="grid">
+                                        <div class="row">
+                                                <h4 class="text-info">You do not have any companions yet.</h4><br>
+                                        </div>
+                                        <div class="row">
+                                                <h5 class="text">Invite Your friends!</h5>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-2 m-2"></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="../../js/jquery.js"></script>
+<script src="../../js/scriptsStatistics.js"></script>
