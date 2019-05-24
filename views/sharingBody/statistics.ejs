@@ -1,3 +1,8 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script>
+    moment().format();
+</script>
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-2 m-2"></div>
@@ -14,7 +19,7 @@
                                 <div class="col-lg-3 mb-4">
                                     <div class="text-center">
                                         <h2 class="h1 mb-0">
-                                            <% if(numberOfUsers > 1) { %>
+                                            <% if(numberOfUsers > 0) { %>
                                                 <%=numberOfUsers%> 
                                             <% } else { %>
                                                 0
@@ -78,26 +83,68 @@
                             <div class="text-center">
                                 <h2 class="mt-5 h2">Users Statistics</h2>
                             </div>
-
-                            <div class="row d-flex p-2">
+                            
+                            <div class="row d-flex justify-content-center align-items-center pt-2 p-2">
                                 <% if(teammates.length > 1){ %>
-                                    <table class="table table-hover mt-3">
+                                    <table class="table table mt-3">
                                         <tbody>
                                             <tr>
                                                 <td colspan="3">
                                                     <div class="row text-center">
-                                                        <div class="col p-4">
-                                                            <p class="font-weight-bold">Completed</p>
-                                                            <canvas id="completedChart"></canvas>
+                                                        <div class="col">
+                                                            <h5 class="h4">Statistics in Time</h5>
                                                         </div>
-                                                        <div class="w-100"></div>
-                                                        <div class="col p-4">
-                                                            <p class="font-weight-bold">Assigned</p>
-                                                            <canvas id="assignedChart"></canvas>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="row d-flex justify-content-center align-items-center pt-2" id="dateForm" >
+                                                        <div class="col form-group p-0">
+                                                            <div class="row d-flex justify-content-between mx-2">
+                                                                <div class="col ">
+                                                                    <div class="form-group row">
+                                                                        <label for="example-date-input" class="col-sm-2 col-form-label pr-0">From</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control" type="date" id="from-date-input">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col ">
+                                                                    <div class="form-group row">
+                                                                        <label for="example-date-input" class="col-sm-2 col-form-label pr-0">To</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control" type="date" id="to-date-input">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <div class="btn btn-warning" title="Search"><span class="small" id="search">Search</span></div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="row text-center" id="dateAlert" style="display: none;">
+                                                        <div class="col">
+                                                            <p class="text-danger">Incorrect range.</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="row text-center">
                                                         <div class="col p-4">
-                                                            <p class="font-weight-bold">Deleted</p>
-                                                            <canvas id="deletedChart"></canvas>
+                                                            <canvas id="timeCompletedChart" width="500" height="300"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="row text-center">
+                                                        <div class="col">
+                                                            <h5 class="h4">All Statistics</h5>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -149,14 +196,33 @@
                                                     </td>
                                                 </tr>
                                             <% }) %> 
+                                            <tr>
+                                                <td colspan="3">
+                                                    <div class="row text-center">
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Completed</p>
+                                                            <canvas id="completedChart"></canvas>
+                                                        </div>
+                                                        <div class="w-100"></div>
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Assigned</p>
+                                                            <canvas id="assignedChart"></canvas>
+                                                        </div>
+                                                        <div class="col p-4">
+                                                            <p class="font-weight-bold">Deleted</p>
+                                                            <canvas id="deletedChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table> 
                                 <% } else{ %>  
-                                    <div class="grid">
-                                        <div class="row">
+                                    <div class="grid justify-content-center align-items-center pt-2">
+                                        <div class="row d-flex justify-content-center align-items-center pt-2">
                                                 <h4 class="text-info">You do not have any companions yet.</h4><br>
                                         </div>
-                                        <div class="row">
+                                        <div class="row d-flex justify-content-center align-items-center pt-2">
                                                 <h5 class="text">Invite Your friends!</h5>
                                         </div>
                                     </div>
@@ -170,7 +236,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="../../js/jquery.js"></script>
 <script src="../../js/scriptsStatistics.js"></script>

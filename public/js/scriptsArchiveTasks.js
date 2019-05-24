@@ -65,7 +65,7 @@ $(function() {
                                                             <div class='col px-2 mt-2 align-self-center'>\
                                                                 <h5 class='text-dark'>" + task.title + "</h5>\
                                                             </div>" + rating + "\
-                                                            <div class='col-2 ml-auto align-self-center text-danger' id='avg" + task.id + "'>" + ratingAvg + "</div>\
+                                                            <div class='col-2 ml-auto align-self-center text-danger avg' id='avg" + task.id + "'>" + ratingAvg + "</div>\
                                                         </div>\
                                                     </div>\
                                                     <div class='card-body bg-white'>\

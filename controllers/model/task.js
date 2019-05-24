@@ -1,6 +1,8 @@
 const Task = require( '../../models/index.js').Task;
 const User = require( '../../models/index.js').User;
 const Rate = require( '../../models/index.js').Rate;
+var moment = require('moment');
+moment().format();
 
 var Sequelize = require("sequelize");
 const Op = Sequelize.Op;
@@ -156,6 +158,37 @@ var task = module.exports = {
                 'quantity']
             ],
             group: ['status','UserId'],
+            include: [{
+                model: User,
+                as: 'User',
+                where: {
+                    BoardId: idBoard
+                },
+                attributes: ['id','name']
+            }]
+        }).then(task => {
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getUsersStatsTime: async function(idBoard, from, to) {
+		return await Task.findAll({
+            where: {
+                date: {
+                    [Op.between]: [moment(from).format('YYYY-MM-DD'), moment(to).format('YYYY-MM-DD')]
+                },
+                status: 'completed'
+            },
+            attributes: [
+                'date',
+                [Sequelize.fn('COUNT', Sequelize.col('status')), 
+                'quantity']
+            ],
+            group: ['date','UserId'],
             include: [{
                 model: User,
                 as: 'User',

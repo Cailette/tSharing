@@ -1,5 +1,5 @@
 
-describe("User all tasks tab", () => {
+describe("Tasks tests", () => {
     before(() => {
       cy.fixture("users/tester").as("tester");
       cy.fixture("models/task").as("task");
@@ -54,8 +54,41 @@ describe("User all tasks tab", () => {
         cy.get('.idComplete').first().click();
         cy.get(".taskRow").should('not.exist')
     });
+    
+    it("Should be add next task", function() {
+        cy
+            .get('#tTitle')
+            .type(this.task2.title)
+            .should("have.value", this.task2.title);
+        cy
+            .get('#tComment')
+            .type(this.task2.comment)
+            .should("have.value", this.task2.comment);
 
-    after(() => {
-        cy.task('deleteTask');
+        cy.get('form').submit()
+        cy.contains(this.task2.title)
+        cy.contains(this.task2.comment)
+    });
+    
+    it("Should be able to assign next task", function() {
+        cy.get('.idAssign').first().click();
+
+        cy.get(".idAssign").should('not.exist')
+        cy.get(".taskRow").should('exist')
+    });
+    
+    it("Should be able to remove task", function() {
+        cy.visit("/sharing/yourTasks");
+        cy.get('.idRemove').first().click();
+        cy.get(".taskRow").should('not.exist')
+
+        cy.visit("/sharing/allTasks");
+        cy.contains(this.task2.title)
+        cy.contains(this.task2.comment)
+    });
+    
+    it("Should be able to delete task", function() {
+        cy.get('.idDelete').first().click();
+        cy.get(".taskRow").should('not.exist')
     });
   });

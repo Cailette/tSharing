@@ -50,4 +50,6 @@ router.get('/statistics', auth.authenticationMiddleware, statisticsController.ge
 
 router.get('/getStatistics', auth.authenticationMiddleware, statisticsController.statistics);
 
+router.post('/getTimeStatistics', auth.authenticationMiddleware, statisticsController.statisticsTime);
+
 module.exports = router;

@@ -31,6 +31,12 @@ Unit tests
 - mkdir test
 - npm test OR mocha --exit
 
+Integration tests
+--
+- <a href="https://github.com/cypress-io/cypress">Cypress</a>
+- npm install cypress --save-dev
+- npm run cypress OR cypress open
+
 Functionality
 --
 1. In the "Create" tab, you can create a board with a unique name and password, as well as your account. Then you can invite friends to join you by sending facebook message or e-mail.

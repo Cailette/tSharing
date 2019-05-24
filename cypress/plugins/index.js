@@ -53,6 +53,20 @@ var connection = mysql.createConnection({
   return null;
 };
 
+const deleteNewestRate = () =>{
+var connection = mysql.createConnection({
+  host     : '127.0.0.1',
+  user     : 'root',
+  database : 'tsharingdb'
+});
+  connection.connect();
+  connection.query('DELETE FROM Rates WHERE id = (select max from (SELECT MAX(r.id) as max FROM Rates as r) as deletedId)', function (error, results, fields) {
+    if (error) throw error;
+    connection.end();
+  });
+  return null;
+};
+
 module.exports = (on) => {
   on('task', {
     'deleteTask' () {
@@ -63,6 +77,9 @@ module.exports = (on) => {
     },
     'deleteBoard' () {
         return deleteNewestBoard();
+    },
+    'deleteRate' () {
+        return deleteNewestRate();
     }
   })
 }
