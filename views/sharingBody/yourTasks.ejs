@@ -1,45 +1,64 @@
-<div class="container mt-4" id="yourTasksView">
-    <div class="row">
-        <div class="col-md-2 m-2"></div>
-            <div class="col-md-8 px-2">
-                    <% if(tasks.length != 0){ %>
-                        <% tasks.forEach(function (task) { %>
-                        <div class="row justify-content-center align-items-center mb-4 taskRow" id="<%= task.id %>">
-                            <div class="card bg-light mb-3 card-block w-100 shadow-sm">
-                                <div class="card-header">
-                                    <div class="d-flex">
-                                        <div class="col px-2 my-2 align-self-center">
-                                            <h5 class="text-dark"><%= task.title %></h5>
-                                        </div>
-                                        <div class="col-4 btns ml-auto" id="btns<%= task.id %>" >
-                                            <div class="idComplete btn btn-primary m-1" id="completeTask?idTask=<%= task.id %>"  title="Complete the task"><span class="small">Complete</span></div>
-                                            <div class="idRemove btn btn-warning m-1" id="removeTask?idTask=<%= task.id %>" title="Remove the task from your list"><span class="small">Remove</span></div>
-                                        </div>
-                                    </div>
+<div class="container mt-4">
+    <div class="row my-2">
+        <div class="col-md-4">
+            <div class="sticky-top">
+                <form id="addTaskForm" class="px-2">
+                    <div class="form-group">
+                        <div class="row">
+                            <span class="mr-2 badge badge-light">Words limit: </span>
+                            <div id="countTopic" class="mr-2 badge badge-light">
+                                <span id="currentTopic">0</span>
+                                <span id="maximumTopic">/45</span>
+                            </div>
+                            <div id="countComment" class="badge badge-light">
+                                <span id="currentComment">0</span>
+                                <span id="maximumComment">/500</span>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <input class="form-control shadow-sm" id="tTitle" type="text" placeholder="Task" name="tTitle" maxlength="45" required>
+                        </div>
+                        <div class="row mt-2">
+                            <textarea class="form-control shadow-sm" id="tComment" placeholder="Comment" name="tComment" maxlength="500" rows="2"></textarea>
+                        </div>
+                        <div class="row mt-2 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-warning px-4 d-flex justify-content-end" title="Add new task" id="addTask"><span class="small">Add</span></button>
+                        </div>
+                    </div>
+                </form>
+            
+                <div class="container mt-4 py-0 px-2" id="sortAndFilterContainer">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col p-0">
+                        Filter tasks by:
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col form-group p-0 ml-3">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="private=N" name="filterRadio" class="custom-control-input sortAndFilter" checked>
+                                    <label class="custom-control-label" for="private=N">All</label>
                                 </div>
-                                <div class="card-body bg-white">
-                                    <%if (task.comment !== "") { %>
-                                        <div class="row px-2" style="white-space: pre-wrap;">
-                                            <p><%= task.comment %></p>
-                                        </div> 
-                                    <% } %>
+                                <div class="col custom-control custom-radio">
+                                    <input type="radio" id="private=Y" name="filterRadio" class="custom-control-input sortAndFilter">
+                                    <label class="custom-control-label" for="private=Y">Only yours</label>
                                 </div>
                             </div>
                         </div>
-                        <% }) %>
-                    <% } else{ %>  
-                        <div id="pageStatement" class="continer d-flex align-items-center justify-content-center">
-                            <div class="row"> 
-                                <h4 class="text-info ">You do not have any assigned tasks yet.</h4><br>
-                            </div>
-                        </div>
-                    <% } %>
+                    </div>
+                </div>
             </div>
-        <div class="col-md-2 m-2"></div>
+        </div>
+        <div class="col-md-8 px-4 content">
+            <div class="container" id="yourTasksView">
+                
+            </div>
+        </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
+
 
 <script src="../../js/jquery.js"></script>
+<script src="../../js/counter.js"></script>
 <script src="../../js/scriptsYourTasks.js"></script>

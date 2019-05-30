@@ -43,6 +43,10 @@ $(function() {
     }
 
     function initTimesStat(names, numberOfUsersStats, from, to){
+        $("#chartDiv").empty();
+        var new_item = $("<canvas id='timeCompletedChart' width='500' height='300'></canvas>");
+        $('#chartDiv').append(new_item);
+        
         const ctx = document.getElementById('timeCompletedChart').getContext('2d');
 
         var data = generateDates(from, to);

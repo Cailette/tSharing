@@ -40,6 +40,10 @@ router.put('/completeTask', auth.authenticationMiddleware, yourTaskController.co
 
 router.put('/removeTask', auth.authenticationMiddleware, yourTaskController.removeTask);
 
+router.get('/filterTasks', auth.authenticationMiddleware, yourTaskController.filter);
+
+router.post('/addPrivateTask', auth.authenticationMiddleware, yourTaskController.post);
+
 router.get('/archiveTasks', auth.authenticationMiddleware, archiveTaskController.get);
 
 router.get('/filterAndSortArchiveTasks', auth.authenticationMiddleware, archiveTaskController.filterAndSort);

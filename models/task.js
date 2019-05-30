@@ -41,7 +41,13 @@ module.exports = (sequelize, DataTypes) => {
         referencesKey:'id',
         notEmpty: true,
         allowNull: false 
-    }
+    }, 
+    private: {
+        type: DataTypes.ENUM('Y','N'),
+        defaultValue: 'N',
+        notEmpty: true,
+        allowNull: false 
+    },
   }, {
     timestamps: false
   });

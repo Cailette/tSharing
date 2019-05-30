@@ -27,13 +27,21 @@ var archiveTask = module.exports = {
             if(req.query.status == 'all'){
                 tasks = await taskContoroller.getTasksWithOptions(BOARD_ID, order, options);
             } else {
-                tasks = await taskContoroller.getTasksWithOptions(BOARD_ID, order, status);
+                if(req.query.status == 'private'){
+					tasks = await taskContoroller.getTasksWithOptionsPrivate(BOARD_ID, order, options);
+				} else {
+					tasks = await taskContoroller.getTasksWithOptions(BOARD_ID, order, status);
+				}
             }
         } else {
             if(req.query.status == 'all'){
                 tasks = await taskContoroller.getUserTasksWithOptions(BOARD_ID, user, order, options);
             } else {
-                tasks = await taskContoroller.getUserTasksWithOptions(BOARD_ID, user, order, status);
+                if(req.query.status == 'private'){
+					tasks = [];
+				} else {
+					tasks = await taskContoroller.getUserTasksWithOptions(BOARD_ID, user, order, status);
+				}
             }
         }
 

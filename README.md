@@ -48,3 +48,4 @@ Functionality
 7. After logging in on the "Archives" tab, the user can see all deleted or completed tasks. The user can rate completed tasks.
 8. User can filter and sort tasks in the "Archives" and "All tasks" tabs. Filter by user name and status, sort by date or title.
 9. User can view statistics about the number of tasks completed, assigned and deleted on "Statistics" tab for board and selected users.
+10. After logging in on the "Your tasks" tab, the user can add private tasks, filter them and after completion and removal can see them in "Archives" tab.

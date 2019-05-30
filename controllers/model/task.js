@@ -70,7 +70,30 @@ var task = module.exports = {
 		return await Task.findAll({
             where: {
                 BoardId: idBoard,
-                [Op.or]: options
+                [Op.or]: options,
+                private: 'N'
+            },
+            include: [{
+                model: User,
+                as: 'User',
+                attributes: ['id','email','name']
+            }], 
+            order: order,
+        }).then(task => {
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getTasksWithOptionsPrivate: async function(idBoard, order, options) {
+		return await Task.findAll({
+            where: {
+                BoardId: idBoard,
+                [Op.or]: options,
+                private: 'Y'
             },
             include: [{
                 model: User,
@@ -92,7 +115,8 @@ var task = module.exports = {
             where: {
                 BoardId: idBoard,
                 UserId: idUser,
-                [Op.or]: options
+                [Op.or]: options,
+                private: 'N'
             },
             include: [{
                 model: User,
@@ -131,6 +155,52 @@ var task = module.exports = {
         })
     },
 
+    getYourPrivateTasks: async function(idBoard, idUser) {
+		return await Task.findAll({
+            where: {
+                BoardId: idBoard,
+                UserId: idUser,
+                status: 'assigned',
+                private: 'Y'
+            },
+            include: [{
+                model: User,
+                as: 'User',
+                attributes: ['id','email','name']
+            }]
+        }).then(task => {
+            console.log(JSON.stringify(task));
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
+    getYourPrivateTasks: async function(idBoard, idUser) {
+		return await Task.findAll({
+            where: {
+                BoardId: idBoard,
+                UserId: idUser,
+                status: 'assigned',
+                private: 'Y'
+            },
+            include: [{
+                model: User,
+                as: 'User',
+                attributes: ['id','email','name']
+            }]
+        }).then(task => {
+            console.log(JSON.stringify(task));
+            if(task) return task;
+            return false;
+        })
+        .catch(err => {
+            console.log('error: ' + err);
+        })
+    },
+
     countTasks: async function(idBoard) {
 		return await Task.findAll({
             attributes: [
@@ -139,7 +209,8 @@ var task = module.exports = {
             ],
             group: ['status'],
             where: {
-                BoardId: idBoard
+                BoardId: idBoard,
+                private: 'N'
             }
         }).then(task => {
             if(task) return task;
@@ -165,7 +236,10 @@ var task = module.exports = {
                     BoardId: idBoard
                 },
                 attributes: ['id','name']
-            }]
+            }],
+            where: {
+                private: 'N'
+            }
         }).then(task => {
             if(task) return task;
             return false;
@@ -181,7 +255,8 @@ var task = module.exports = {
                 date: {
                     [Op.between]: [moment(from).format('YYYY-MM-DD'), moment(to).format('YYYY-MM-DD')]
                 },
-                status: 'completed'
+                status: 'completed',
+                private: 'N'
             },
             attributes: [
                 'date',
