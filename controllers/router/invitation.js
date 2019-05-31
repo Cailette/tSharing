@@ -5,8 +5,4 @@ var join = module.exports = {
         res.render('invitation');
     },
 
-    post: function(req, res, next) {
-        res.render('invitation');
-    },
-    
 }

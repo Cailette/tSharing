@@ -4,8 +4,4 @@ var start = module.exports = {
         res.render('start');
     },
 
-    post: function(req, res, next) {
-        res.render('start');
-    },
-    
 }

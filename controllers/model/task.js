@@ -178,29 +178,6 @@ var task = module.exports = {
         })
     },
 
-    getYourPrivateTasks: async function(idBoard, idUser) {
-		return await Task.findAll({
-            where: {
-                BoardId: idBoard,
-                UserId: idUser,
-                status: 'assigned',
-                private: 'Y'
-            },
-            include: [{
-                model: User,
-                as: 'User',
-                attributes: ['id','email','name']
-            }]
-        }).then(task => {
-            console.log(JSON.stringify(task));
-            if(task) return task;
-            return false;
-        })
-        .catch(err => {
-            console.log('error: ' + err);
-        })
-    },
-
     countTasks: async function(idBoard) {
 		return await Task.findAll({
             attributes: [

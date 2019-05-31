@@ -5,6 +5,4 @@ var invitationController = require('../controllers/router/invitation');
 
 router.get('/', invitationController.get);
 
-router.post('/', invitationController.post);
-
 module.exports = router;

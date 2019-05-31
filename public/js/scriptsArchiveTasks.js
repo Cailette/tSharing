@@ -1,6 +1,6 @@
 $(function() {
     change();
-    setRating();
+    // setRating();
 
     $( ".sortAndFilter" ).change(function() {
         change();
@@ -120,7 +120,7 @@ $(function() {
                     $('#archiveTasksView').append(new_item);
                     new_item.slideToggle();
                 }
-                setRating();
+                // setRating();
             },
         });
     }

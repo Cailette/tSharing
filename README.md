@@ -15,8 +15,10 @@ Install
 2. cd folder_name
 3. git clone https://github.com/Cailette/tSharing.git .
 4. npm install
-5. npm start OR nodemon ./bin/www 
-6. then load http://localhost:3000/ in your browser to access the app
+5. npx sequelize-cli db:create (make sure your MySQL server is running)
+6. npx sequelize-cli db:migrate
+7. npm start OR nodemon ./bin/www 
+8. then load http://localhost:3000/ in your browser to access the app
 
 Debug
 --
