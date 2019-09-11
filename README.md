@@ -42,25 +42,45 @@ Integration tests
 Functionality
 --
 1. In the "Create" tab, you can create a board with a unique name and password, as well as your account. Then you can invite friends to join you by sending facebook message or e-mail.
-![](./gif/Create.gif){:height="50%"}
+<p align="center">
+    <img src="./gif/Create.gif" width="500" >
+</p>
 2. In the "Join" tab, you can join the board using the name and password from your friend and create your account.
-![](./gif/Join.gif)
+<p align="center">
+    <img src="./gif/Join.gif" width="500" >
+</p>
 3. In the "Login" tab, you can log in to your account associated with the board shared with your friends.
-![](./gif/Login.gif)
+<p align="center">
+    <img src="./gif/Login.gif" width="500" >
+</p>
 4. After logging in on the "account" tab, the user can view teammates and edit or delete the account.
-![](./gif/Account.gif)
-![](./gif/EditAccount.gif)
+<p align="center">
+    <img src="./gif/EditAccount.gif" width="500" >
+</p>
 5. After logging in on the "All tasks" tab, the user can see all tasks added by the board's members. User can add new task, assign any free task to himself or delete it.
-![](./gif/AddTask.gif)
+<p align="center">
+    <img src="./gif/AddTask.gif" width="500" >
+</p>
 6. After logging in on the "Your tasks" tab, the user can see all tasks assigned to him. User can complete or remove task from his board.
 7. After logging in on the "Archives" tab, the user can see all deleted or completed tasks. The user can rate completed tasks.
-![](./gif/Archive.gif)
+<p align="center">
+    <img src="./gif/Archive.gif" width="500" >
+</p>
 8. User can filter and sort tasks in the "Archives" and "All tasks" tabs. Filter by user name and status, sort by date or title.
-![](./gif/SortAndFilterAllTask1.gif)
-![](./gif/SortAndFilterAllTask2.gif)
-![](./gif/SortAndFilterAllTask3.gif)
+<p align="center">
+    <img src="./gif/SortAndFilterAllTask1.gif" width="500" >
+</p>
+<p align="center">
+    <img src="./gif/SortAndFilterAllTask3.gif" width="500" >
+</p>
 9. User can view statistics about the number of tasks completed, assigned and deleted on "Statistics" tab for board and selected users.
-![](./gif/TabStat.gif)
-![](./gif/TimeStat.gif)
+<p align="center">
+    <img src="./gif/TabStat.gif" width="500" >
+</p>
+<p align="center">
+    <img src="./gif/TimeStat.gif" width="500" >
+</p>
 10. After logging in on the "Your tasks" tab, the user can add private tasks, filter them and after completion and removal can see them in "Archives" tab.
-![](./gif/CompletePrivateTask.gif)
+<p align="center">
+    <img src="./gif/CompletePrivateTask.gif" width="500" >
+</p>
