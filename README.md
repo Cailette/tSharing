@@ -42,7 +42,7 @@ Integration tests
 Functionality
 --
 1. In the "Create" tab, you can create a board with a unique name and password, as well as your account. Then you can invite friends to join you by sending facebook message or e-mail.
-![](./gif/Create.gif | width=250)
+![](./gif/Create.gif){:height="50%"}
 2. In the "Join" tab, you can join the board using the name and password from your friend and create your account.
 ![](./gif/Join.gif)
 3. In the "Login" tab, you can log in to your account associated with the board shared with your friends.
